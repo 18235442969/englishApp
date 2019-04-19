@@ -4,6 +4,7 @@
 		<view>
 			<text class="title">{{title}}</text>
 		</view>
+		<icon-font className="icontuiguangdingdan"></icon-font>
 	</view>
 </template>
 
@@ -15,7 +16,7 @@
 			}
 		},
 		onLoad() {
-
+		
 		},
 		methods: {
 
@@ -38,5 +39,9 @@
 	.title {
 		font-size: 36upx;
 		color: #8f8f94;
+	}
+	.svg-icon{
+		width: 100px;
+		height: 100px;
 	}
 </style>
