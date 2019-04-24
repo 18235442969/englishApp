@@ -1,0 +1,67 @@
+.registe {
+  .registe-bg {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url(~@/asstes/images/loginBg.png);
+    background-size: 100vw 100vh;
+    background-repeat: none;
+
+    .logo {
+      display: block;
+      margin: 0 auto;
+      margin-top: 2.5rem;
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .phone,
+    .password,
+    .trade-password,
+    .referrer,
+    .code {
+      padding: 0 1rem;
+
+      .registe-line {
+        display: flex;
+        padding: 5px 0;
+        align-items: center;
+        border-bottom: 1px solid #faa04e;
+
+        .input-input {
+          flex-grow: 1;
+          padding-left: 10px;
+          .registe-input{
+            font-size: 0.85rem;
+            color: #fff;
+          }
+        }
+        .input-text{
+          font-size: 0.85rem;
+          color: #fff;
+        }
+        .input-send-text {
+          font-size: 0.85rem;
+          color: $uni-text-color-disable;
+        }
+      }
+    }
+    .registe-tips{
+      margin-top: 0.5rem;
+      text-align: center;
+      color: #fbc895;
+      font-size: 0.75rem;
+      .registe-tips-agreement{
+        color: #f4bf45;
+      }
+    }
+  }
+}
+
+.phone {
+  margin-top: 3rem;
+}
+
+.password, .trade-password, .referrer, .code {
+  margin-top: 1rem;
+}

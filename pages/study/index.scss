@@ -1,0 +1,62 @@
+.study {
+  .icon-left {
+    padding: 10px 0 10px 10px;
+    border-bottom: 0.5px solid #f2a638;
+  }
+
+  .study-info {
+    display: flex;
+    margin-top: 2rem;
+    color: #feff00;
+    font-weight: 300;
+
+    .study-info-day,
+    .study-info-wordnum {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 50%;
+      border-right: 0.5px solid #f2a638;
+
+      .study-info-num {
+        display: flex;
+        justify-content: center;
+
+        .info-num-left {
+          display: flex;
+          line-height: 2rem;
+          font-size: 2.5rem;
+        }
+
+        .info-num-right {
+          line-height: 0.75rem;
+          font-size: 0.75rem;
+          color: #f5c88e;
+        }
+      }
+
+      .study-info-text {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        width: 60%;
+        color: #f6cd9a;
+        font-size: 0.8rem;
+        padding: 10px 0;
+        border-bottom: 2px solid #f7d1a8;
+      }
+    }
+  }
+
+  .study-start {
+    position: absolute;
+    left: 10vw;
+    top: 50vh;
+    width: 80vw;
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+  }
+}

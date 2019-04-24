@@ -1,5 +1,5 @@
 <template>
-  <i :class="iconClass" />
+  <i :class="iconClass" @click="clickIcon"/>
 </template>
 
 <script>
@@ -13,6 +13,10 @@
       fontClass: {
         type: String,
         default: ""
+      },
+      clickIcon: {
+        type: Function,
+        default: () => {}
       }
     },
     computed: {
