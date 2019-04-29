@@ -19,39 +19,113 @@
 		// 	}
 		// },
 		// {
-		// 	"path": "pages/changePassword/index",
+		// 	"path": "pages/study/index",
 		// 	"style": {
-		// 		"navigationBarTitleText": "修改登录密码"
+		// 		"navigationBarTitleText": "学习",
+		// 		"navigationStyle": "custom",
+		// 		"app-plus":{
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/trade/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "交易",
+		// 		"navigationStyle": "custom",
+		// 		"app-plus":{
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/user/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "我的",
+				// "navigationStyle": "custom",
+				// "app-plus":{
+				// 	"titleNView": false
+				// }
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/userInfo/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "个人资料"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/team/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "我的团队"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/tradeRecord/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "交易记录",
+				// "navigationStyle": "custom",
+				// "app-plus":{
+				// 	"titleNView": false
+				// }
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/recordeRelease/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "释放记录",
+		// 		"navigationStyle": "custom",
+		// 		"app-plus":{
+		// 			"titleNView": false
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/rewardsRelease/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "奖励记录"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/notice/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "公告服务"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/noticeDetail/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "公告详情"
 		// 	}
 		// },
 		{
-			"path": "pages/study/index",
+			"path": "pages/changeTradePassword/index",
 			"style": {
-				"navigationBarTitleText": "学习",
-				"navigationStyle": "custom",
-				"app-plus":{
-					"titleNView": false
-				}
+				"navigationBarTitleText": "修改交易密码"
 			}
 		},
 		{
-			"path": "pages/trade/index",
+			"path": "pages/safe/index",
 			"style": {
-				"navigationBarTitleText": "交易",
-				"navigationStyle": "custom",
-				"app-plus":{
-					"titleNView": false
-				}
+				"navigationBarTitleText": "安全设置"
+			}
+		},
+		// {
+		// 	"path": "pages/realName/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "实名认证"
+		// 	}
+		// },
+		{
+			"path": "pages/changePassword/index",
+			"style": {
+				"navigationBarTitleText": "修改登录密码"
 			}
 		},
 		{
-			"path": "pages/user/index",
+			"path": "pages/face/index",
 			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationStyle": "custom",
-				"app-plus":{
-					"titleNView": false
-				}
+				"navigationBarTitleText": "刷脸认证"
 			}
 		}
 	],

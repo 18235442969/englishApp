@@ -175,7 +175,7 @@
   .iconBack{
     position: absolute;
     top: calc(var(--status-bar-height) + 5px);
-    left: 15px;
+    left: 10px;
 		color: #fff;
 		font-size: 1rem !important;
   }

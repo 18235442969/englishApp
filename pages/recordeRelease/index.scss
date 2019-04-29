@@ -1,0 +1,33 @@
+.recorde-release{
+  .recorde-info{
+    height: 9rem;
+    background-image: url(../../asstes/images/loginBg.png);
+    text-align: center;
+    .recorde-nav{
+      display: flex;
+      flex-direction: row;
+      .recorde-nav-icon{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #fff;
+      }
+    }
+    .recorde-info-data{
+      margin-top: 1rem;
+      .recorde-info-text{
+        font-size: 0.75rem;
+        color: #f9d6a2;
+      }
+      .recorde-info-money{
+        font-size: 1.4rem;
+        color: #fff;
+      }
+    }
+  }
+  .recorde-list{
+    padding: 0 10px;
+    width: auto;
+    height: calc(100vh - 10rem);
+  }
+}

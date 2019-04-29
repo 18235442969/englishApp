@@ -1,0 +1,105 @@
+.tradeRecord{
+  .tradeRecord-top{           
+    height: 25vh;
+    .tradeRecord-nav{
+      display: flex;
+      flex-direction: row;
+      .tradeRecord-nav-icon{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #fff;
+      }
+      .tradeRecord-nav-balance{
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 1;
+        .tradeRecord-nav-balance-text{
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          background-color: #feffff;
+          margin-right: 10px;
+          margin-top: 2px;
+          padding: 0 10px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          border-radius: 30px;
+          -webkit-border-radius: 30px;
+          -moz-border-radius: 30px;
+          -ms-border-radius: 30px;
+          -o-border-radius: 30px;
+          .tradeRecord-nav-balance-money{
+            color: #f76222;
+          }
+        }
+      }
+    }
+    .tradeRecord-info{
+      display: flex;
+      flex-direction: row;
+      margin-top: 2rem;
+      .tradeRecord-info-item{
+        display: flex;
+        flex-grow: 1;
+        width: 50%;
+        flex-direction: column;
+        .tradeRecord-info-text{
+          display: flex;
+          justify-content: center;
+          color: #feff74;
+          font-size: 1.1rem;
+        }
+        .tradeRecord-info-money{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          color: #fcffff;
+          font-size: 1.1rem;
+          align-items: flex-end;
+          .tradeRecord-info-money-text{
+            margin-left: 2px;
+            color: #f9d6a1;
+            font-size: 0.7rem;
+          }
+        }
+      }
+      .tradeRecord-info-line{
+        border-right: 1px solid #fbc17a;
+      }
+    }
+  }
+  .tradeRecord-list{
+    height: 75vh;
+    background-color: #feffff;
+    .tradeRecord-list-tab{
+      display: flex;
+      flex-direction: row;
+      .tradeRecord-list-tab-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        width: 50%;
+        height: 6vh;
+        font-size: 0.8rem;
+        color: #9fa0a2;
+      }
+      .tradeRecord-list-tab-item-choose{
+        color: #000;
+        font-weight: 600;
+        border-bottom: 2px solid #f68256;
+      }
+    }
+    .tradeRecord-line{
+      height: 5px;
+      background-color: #eeefef;
+    }
+    .tradeRecord-info-list{
+      width: auto;
+      height: 67vh;
+      padding: 0 10px;
+      overflow-y: auto;
+    }
+  }
+}

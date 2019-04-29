@@ -1,0 +1,105 @@
+.user{
+  .user-data{
+    height: 30vh;
+    .user-top{
+      text-align: right;
+      padding: 10px 10px 0 0;
+      .user-leave{
+        display: inline-block;
+        background-color: #fbe59a;
+        color: #fa6325;
+        border-radius: 30px;
+        padding: 5px 8px;
+        font-size: 0.7rem;
+        .user-leave-logo{
+          margin-top: -3px;
+          vertical-align: middle;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+    .user-name, .user-id{
+      display: flex;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .user-id{
+      opacity: 0.5;
+      font-size: 0.75rem;
+    }
+  }
+  .user-info{
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    z-index: 10;
+    top: 20vh;
+    left: 4vw;
+    border: 1px solid #f5f4f4;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: 92vw;
+    height: 18vh;
+    .user-info-item{
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex: 0 0 33.33%;
+      align-items: center;
+      justify-content: center;
+      .user-info-item-top, .user-info-item-center, .user-info-item-bottom{
+        display: flex;
+        flex-grow: 1;
+        flex: 0 0 33.33%;
+      }
+      .user-info-item-top{
+        align-items: flex-end;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+      .user-info-item-center{
+        align-items: center;
+        font-size: 1.1rem;
+        color: #f64d00;
+
+      }
+      .user-info-item-bottom{
+        font-size: 0.8rem;
+        color: #b3b4b5;
+        .user-money{
+          width: 3rem;
+          height: 1.2rem;
+        }
+      }
+    }
+  }
+  .user-list{
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    width: 100vw;
+    height: 70vh;
+    .user-item{
+      margin-top: 10vh;
+      padding: 0 10px;
+    }
+    .user-item-nav{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 1px solid #ececec;
+      padding: 0.55rem 0;
+      .user-item-nav-text{
+        padding-left: 10px;
+        flex-grow: 1;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.userinfo{
+  .user-info-list{
+    padding: 0 10px;
+    .user-info-item{
+      display: flex;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid #ececec;
+      flex-direction: row;
+      .user-info-item-icon{
+        display: flex;
+        align-items: center;
+      }
+      .user-info-item-text{
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        padding-left: 10px;
+        font-size: 0.85rem;
+      }
+      .user-info-item-right{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 0.8rem;
+        color: #c3c3c3;
+      }
+    }
+  }
+}

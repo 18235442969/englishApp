@@ -1,0 +1,47 @@
+.change-password {
+  .input-list {
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+
+    .input-line {
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f1f2;
+    }
+
+    .code-line,
+    .password-line {
+      display: flex;
+      margin-top: 1rem;
+
+      .code-input,
+      .password-input {
+        flex-grow: 1;
+      }
+
+      .code-text {
+        font-size: 0.85rem;
+        color: #f77a3b;
+      }
+
+      .code-send-text {
+        font-size: 0.85rem;
+        color: $uni-text-color-disable;
+      }
+
+      .password-icon {
+        width: 2rem;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.change-password-input {
+  padding: 0 3px;
+  color: #000;
+  font-size: 0.85rem;
+}
+
+.change-password-placeholder {
+  color: #b6b7b8;
+}

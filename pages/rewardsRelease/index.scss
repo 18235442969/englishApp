@@ -1,0 +1,30 @@
+.rewards{
+  .rewards-tab{
+    display: flex;
+    flex-direction: row;
+    .rewards-tab-item{
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center;
+      width: 33.33%;
+      height: 6vh;
+      font-size: 0.8rem;
+      color: #9fa0a2;
+    }
+    .rewards-tab-item-choose{
+      color: #000;
+      font-weight: 600;
+      border-bottom: 2px solid #f68256;
+    }
+  }
+  .rewards-line{
+    height: 5px;
+    background-color: #eeefef;
+  }
+  .rewards-list{
+    height: 92vh;
+    width: auto;
+    padding: 0 10px;
+  }
+}

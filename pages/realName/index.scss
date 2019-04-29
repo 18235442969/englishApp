@@ -1,0 +1,46 @@
+.realname {
+  .realname-info {
+    padding: 0.7rem 4vw;
+
+    .realname-line {
+      padding: 5px 0;
+      border-bottom: 1px solid #f4f5f5;
+
+      .realname-input {
+        font-size: 0.85rem;
+        color: #000;
+      }
+    }
+    .realname-info-idcard{
+      margin-top: 1rem;
+    }
+  }
+
+  .realname-idcard {
+    padding: 0.7rem 4vw;
+    .realname-idcard-tips{
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .realname-idcard-image{
+      display: flex;
+      margin-top: 1rem;
+      .realname-idcard-image-middle{
+        width: 2rem;
+      }
+      .realname-idcard-image-front, .realname-idcard-image-reverse{
+        flex-grow: 1;
+        .idcard-image{
+          width: 100%;
+          height: 4.5rem;
+        }
+      }
+      .realname-idcard-image-tips{
+        text-align: center;
+        color: #9a9b9c;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
