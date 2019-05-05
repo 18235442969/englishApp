@@ -1,17 +1,15 @@
 const state = {
-  name: 'hzy'
 }
 
 const actions = {
-  changeName({commit}) {
-    commit('CHANGENAME')
+  changeUserInfo({commit}, userInfo) {
+    commit('CHANGENAME', userInfo);
   }
 }
 
-
 const mutations = {
-  CHANGENAME(state) {
-    state.name = 'hou'
+  CHANGEUSERINFO(state, userInfo) {
+    state.userInfo = userInfo;
   }
 }
 

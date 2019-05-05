@@ -7,6 +7,12 @@ import IconFont from './compoments/Icon/index.vue';
 import './icons/iconfont.css';
 
 Vue.prototype.$store = store;
+Vue.prototype.$go = (url) => {
+    uni.navigateTo({
+        url: `/pages/${url}/index`
+    })
+};
+
 Vue.config.productionTip = false;
 
 Vue.component('icon-font', IconFont);

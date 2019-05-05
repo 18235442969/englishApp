@@ -1,0 +1,77 @@
+.trade{
+  .trade-info{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #faa838;
+    .trade-info-top, .trade-info-bottom{
+      display: flex;
+      flex-direction: row;
+      .trade-info-top-left, .trade-info-top-right, .trade-info-bottom-left, .trade-info-bottom-right{
+        width: 50%;
+        flex-grow: 1;
+      }
+      .trade-info-top-left, .trade-info-bottom-left{
+        padding-left: 15px;
+      }
+      .trade-info-top-right, .trade-info-bottom-right{
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 15px;
+        font-size: 0.75rem;
+        color: #fbc990;
+        .trade-info-top-right-num, .trade-info-bottom-right-num{
+          color: #feff51;
+        }
+      }
+      .trade-info-top-left{
+        color: #feff51;
+        font-size: 1.5rem;
+      }
+      .trade-info-bottom-left{
+        color: #74d76b;
+        font-size: 0.75rem;
+      }
+    }
+    .trade-info-top{
+      margin-top: 15px;
+    }
+  }
+  .trade-chart{
+    margin-top: 15px;
+    padding: 0 15px;
+    .trade-chart-btn-list{
+      display: flex;
+      flex-direction: row;
+      .trade-chart-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 1.5rem;
+        background-color: #fab44c;
+        color: #fcdfb1;
+        font-size: 0.85rem;
+      }
+      .trade-chart-btn-choose{
+        background-color: #feeb8e;
+        color: #fd632a;
+      }
+    }
+  }
+  .trade-cancelled{
+    display: flex;
+    padding: 0 15px;
+    .trade-cancelled-new, .trade-cancelled-standard{
+      flex-grow: 1;
+      width: 50%;
+      background-color: #f88c36;
+      .trade-cancelled-new-logo, .trade-cancelled-standard-logo{
+        .trade-cancelled-new-img, .trade-cancelled-standard-logo{
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+  }
+}

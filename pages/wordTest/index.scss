@@ -1,0 +1,60 @@
+.word-test {
+  text-align: center;
+  .word-test-word {
+    padding-top: 5rem;
+    text-align: center;
+    font-size: 3rem;
+    color: #0476e7;
+    word-wrap: break-word;
+  }
+
+  .word-test-soundmark {
+    font-size: 1rem;
+    color: #727272;
+  }
+
+  .word-text-list {
+    margin-top: calc(100vh - 25rem - 50px);
+    padding: 0 15px;
+
+    .word-text-item {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 15px;
+      height: 3rem;
+      border: 1px solid #c7c7c7;
+      border-radius: 10px;
+      color: #000;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+
+      .word-text-item-option {
+        margin-right: 10px;
+        font-size: 0.9rem;
+      }
+
+      .word-text-item-translate {
+        font-size: 0.75rem;
+      }
+    }
+
+    .item-right {
+      margin: 0 0 0 30px;
+    }
+
+    .word-text-item-true{
+      background-color: #62c972;
+      color: #fff;
+      border: none;
+    }
+
+    .word-text-item-false{
+      background-color: #c96262;
+      color: #fff;
+      border: none;
+    }
+  }
+}

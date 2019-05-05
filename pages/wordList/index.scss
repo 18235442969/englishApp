@@ -1,0 +1,41 @@
+.word-list{
+  .word-list-word{
+    padding-top: 5rem;
+    text-align: center;
+    font-size: 3rem;
+    color: #0476e7;
+    word-wrap: break-word;
+  }
+  .word-list-know-btn{
+    margin-top: 7rem;
+    .know-btn{
+      width: 85%;
+      background-color: #fd7b4e;
+      color: #fff;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      border: none;
+    }
+    .know-btn-active{
+      background-color: #ff632d;
+    }
+  }
+  .word-list-unknow-btn{
+    margin-top: 16px;
+    .unknow-btn{
+      width: 85%;
+      background-color: #eaeaea;
+      color: #9fa0a2;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      border: none;
+    }
+    .unknow-btn-active{
+      background-color: #e1e1e1;
+    }
+  }
+}
+
+button::after{
+  border: none;
+}

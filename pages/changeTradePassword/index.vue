@@ -15,7 +15,7 @@
 			</view>
       <view class="input-line password-line">
         <view class="password-input">
-          <input :type="passworType" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入交易密码" :maxlength="20" />
+          <input :type="passworType" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入交易密码" :maxlength="6" />
         </view>
         <view class="password-icon" @click="changePasswordType">
           <icon-font className="iconanquan" fontClass="passwordIcon" v-if="passworType == 'password'"/>

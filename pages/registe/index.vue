@@ -41,7 +41,7 @@
               placeholder-class="registe-placeholder"
               v-model="code"
               placeholder="请输入验证码"
-              :maxlength="20"
+              :maxlength="6"
             />
           </view>
           <view :class="codeSend ? 'input-send-text' : 'input-text'" @click="sendCode">
@@ -64,7 +64,7 @@
               class="registe-input"
               placeholder-class="registe-placeholder"
               v-model="password"
-              placeholder="请输入密码"
+              placeholder="请输入登录密码"
               :maxlength="20"
             />
           </view>
@@ -122,6 +122,8 @@
 
 <script>
   import EButton from '../../compoments/EButton/index.vue';
+  import valid from '../../utils/valid.js';
+  import userApi from '../../api/user.js';
   export default {
     components: {
       EButton
@@ -157,11 +159,69 @@
           this.codeSend = true;
         }
       },
-      sendCode() {
-        this.timer();
+      async sendCode() {
+        if (valid.isStrEmpty(this.phone)) {
+          return uni.showToast({
+						icon: 'none',
+						title: '请输入手机号'
+					})
+        }
+        try {
+          // let res = await userApi.sendCode();
+          // if (res.success) {
+          //   this.timer();
+          // } else {
+          //   return uni.showToast({
+          //     icon: 'none',
+          //     title: '发送失败'
+          //   })
+          // }
+        } catch (error) {
+          
+        }
       },
-      submit() {
-        console.log(1)
+      async submit() {
+        // if (valid.isStrEmpty(this.phone)) {
+        //   return uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请输入手机号'
+				// 	})
+        // }
+        // if (valid.isStrEmpty(this.code)) {
+        //   return uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请输入验证码'
+				// 	})
+        // }
+        // if (valid.isStrEmpty(this.password)) {
+        //   return uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请输入登录密码'
+				// 	})
+        // }
+        // if (valid.isStrEmpty(this.tradePassword)) {
+        //   return uni.showToast({
+				// 		icon: 'none',
+				// 		title: '请输入交易密码'
+				// 	})
+        // }
+        // let res = await userApi.registe();
+        // if (res.success) {
+          // uni.showToast({
+          //   icon: 'none',
+					// 	title: '注册成功',
+          //   mask: true,
+          //   duration: 1000
+          // })
+          // setTimeout(() => {
+          //   this.goBack()
+          // }, 1000);
+        // } else {
+        //   return uni.showToast({
+        //     icon: 'none',
+				// 		title: '注册失败'
+        //   })
+        // }
       }
     }
   };

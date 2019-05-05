@@ -1,33 +1,57 @@
 {
 	"pages": [
-		// {
-		// 	"path": "pages/login/index",
-			// "style": {
-				// "navigationStyle": "custom",
-				// "app-plus":{
-				// 	"titleNView": false
-				// }
-			// }
-		// },
-		// {
-		// 	"path": "pages/registe/index",
-		// 	"style": {
-		// 		"navigationStyle": "custom",
-		// 		"app-plus":{
-		// 			"titleNView": false
-		// 		}
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/study/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "学习",
-		// 		"navigationStyle": "custom",
-		// 		"app-plus":{
-		// 			"titleNView": false
-		// 		}
-		// 	}
-		// },
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/registe/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/study/index",
+			"style": {
+				"navigationBarTitleText": "学习",
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/book/index",
+			"style": {
+				"navigationBarTitleText": "词库"
+			}
+		},
+		{
+			"path": "pages/wordList/index",
+			"style": {
+				"navigationBarTitleText": "单词列表"
+			}
+		},
+		{
+			"path": "pages/wordExplain/index",
+			"style": {
+				"navigationBarTitleText": "单词解释"
+			}
+		},
+		{
+			"path": "pages/wordTest/index",
+			"style": {
+				"navigationBarTitleText": "测试"
+			}
+		},
 		// {
 		// 	"path": "pages/trade/index",
 		// 	"style": {
@@ -38,66 +62,66 @@
 		// 		}
 		// 	}
 		// },
-		// {
-		// 	"path": "pages/user/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "我的",
-				// "navigationStyle": "custom",
-				// "app-plus":{
-				// 	"titleNView": false
-				// }
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/userInfo/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "个人资料"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/team/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "我的团队"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/tradeRecord/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "交易记录",
-				// "navigationStyle": "custom",
-				// "app-plus":{
-				// 	"titleNView": false
-				// }
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/recordeRelease/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "释放记录",
-		// 		"navigationStyle": "custom",
-		// 		"app-plus":{
-		// 			"titleNView": false
-		// 		}
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/rewardsRelease/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "奖励记录"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/notice/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "公告服务"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/noticeDetail/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "公告详情"
-		// 	}
-		// },
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/userInfo/index",
+			"style": {
+				"navigationBarTitleText": "个人资料"
+			}
+		},
+		{
+			"path": "pages/team/index",
+			"style": {
+				"navigationBarTitleText": "我的团队"
+			}
+		},
+		{
+			"path": "pages/tradeRecord/index",
+			"style": {
+				"navigationBarTitleText": "交易记录",
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/recordeRelease/index",
+			"style": {
+				"navigationBarTitleText": "释放记录",
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/rewardsRelease/index",
+			"style": {
+				"navigationBarTitleText": "奖励记录"
+			}
+		},
+		{
+			"path": "pages/notice/index",
+			"style": {
+				"navigationBarTitleText": "公告服务"
+			}
+		},
+		{
+			"path": "pages/noticeDetail/index",
+			"style": {
+				"navigationBarTitleText": "公告详情"
+			}
+		},
 		{
 			"path": "pages/changeTradePassword/index",
 			"style": {
@@ -110,12 +134,12 @@
 				"navigationBarTitleText": "安全设置"
 			}
 		},
-		// {
-		// 	"path": "pages/realName/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "实名认证"
-		// 	}
-		// },
+		{
+			"path": "pages/realName/index",
+			"style": {
+				"navigationBarTitleText": "实名认证"
+			}
+		},
 		{
 			"path": "pages/changePassword/index",
 			"style": {
@@ -140,16 +164,18 @@
 			"color": "#8d8f90",
 			"selectedColor": "#ec5b00",
 			"backgroundColor": "#ffffff",
-			"list": [{
+			"list": [
+			// 	{
+			// 		"pagePath": "pages/trade/index",
+			// 		"iconPath": "static/images/trade.png",
+			// 		"selectedIconPath": "static/images/tradeSelect.png",
+			// 		"text": "交易"
+			// },
+			{
 					"pagePath": "pages/study/index",
 					"iconPath": "static/images/study.png",
 					"selectedIconPath": "static/images/studySelect.png",
 					"text": "学习"
-			},{
-					"pagePath": "pages/trade/index",
-					"iconPath": "static/images/trade.png",
-					"selectedIconPath": "static/images/tradeSelect.png",
-					"text": "交易"
 			},{
 					"pagePath": "pages/user/index",
 					"iconPath": "static/images/user.png",

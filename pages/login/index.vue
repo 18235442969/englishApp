@@ -39,6 +39,9 @@
 
 <script>
 	import EButton from '../../compoments/EButton/index.vue';
+	import valid from '../../utils/valid.js';
+	import userApi from '../../api/user.js';
+	import {mapActions} from 'vuex';
 	const space = 'user'
 	export default {
 		name: 'Login',
@@ -54,10 +57,35 @@
 		computed: {
 		},
 		methods: {
-			clickBtn() {
-				uni.redirectTo({
-					url: '/pages/study/index'
-				})
+			...mapActions(space, {
+				changeName: 'changeName'
+			}),
+			async clickBtn() {
+				if (valid.isStrEmpty(this.phone)) {
+					return uni.showToast({
+						icon: 'none',
+						title: '请输入手机号'
+					})
+				}
+				if (valid.isStrEmpty(this.password)) {
+					return uni.showToast({
+						icon: 'none',
+						title: '请输入密码'
+					})
+				}
+				try {
+					// let res = await userApi.login();
+					// if (res.success) {
+						this.changeName()
+					// 	uni.switchTab({
+					// 		url: '/pages/study/index'
+					// 	})
+					// } else {
+
+					// }
+				} catch (error) {
+					console.log(error);
+				}
 			},
 			gotoPage(url) {
 				uni.navigateTo({

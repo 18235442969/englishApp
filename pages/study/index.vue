@@ -8,7 +8,7 @@
 			<view class="study-info-day">
 				<view class="study-info-num">
 					<view class="info-num-left">
-						100<text class="info-num-right">天</text>
+						0<text class="info-num-right">天</text>
 					</view>
 				</view>
 				<view class="study-info-text">
@@ -18,7 +18,7 @@
 			<view class="study-info-wordnum">
 				<view class="study-info-num">
 					<view class="info-num-left">
-						2146<text class="info-num-right">个</text>
+						0<text class="info-num-right">个</text>
 					</view>
 				</view>
 				<view class="study-info-text">
@@ -47,7 +47,9 @@
 				console.log(1)
 			},
 			gotoBookPage() {
-				console.log(1)
+				uni.navigateTo({
+					url: '/pages/book/index'
+				})
 			}
 		}
 	}
