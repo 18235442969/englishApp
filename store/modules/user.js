@@ -1,9 +1,10 @@
 const state = {
+  userInfo: uni.getStorageSync('user-info') || {}
 }
 
 const actions = {
   changeUserInfo({commit}, userInfo) {
-    commit('CHANGENAME', userInfo);
+    commit('CHANGEUSERINFO', userInfo);
   }
 }
 

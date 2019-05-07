@@ -18,12 +18,12 @@
           <input :type="passworType" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入新密码" :maxlength="20" />
         </view>
         <view class="password-icon" @click="changePasswordType">
-          <icon-font className="iconanquan" fontClass="passwordIcon" v-if="passworType == 'password'"/>
-          <icon-font className="icontuandui" fontClass="passwordIcon" v-else/>
+          <icon-font className="iconmimabukejian" fontClass="passwordIcon" v-if="passworType == 'password'"/>
+          <icon-font className="iconmimakejian" fontClass="passwordIcon" v-else/>
         </view>
 			</view>
     </view>
-    <e-button text="确认修改" className="change-password-btn" :clickBtn="submit"></e-button>
+    <e-button text="确认修改" className="change-password-btn" @clickBtn="submit"></e-button>
   </view>
 </template>
 
@@ -31,11 +31,15 @@
 <script>
   import TopLine from '../../compoments/TopLine/index.vue';
   import EButton from '../../compoments/EButton/index.vue';
+  import { inputValid } from '../../mixins/index.js';
+  import valid from '../../utils/valid.js'
+  import userApi from '../../api/user.js';
   export default {
     components: {
       TopLine,
       EButton
     },
+    mixins: [inputValid],
     data() {
       return {
         codeSend: false,
@@ -45,6 +49,8 @@
         passworType: 'password',
         sendCodeText: '获取验证码'
       };
+    },
+    mounted() {
     },
     methods: {
       changePasswordType() {
@@ -66,11 +72,60 @@
           this.codeSend = true;
         }
       },
-      sendCode() {
-        this.timer();
+      async sendCode() {
+        if (!this.inputValid({
+          phone: this.phone
+        })) {
+          return;
+        }
+        uni.showLoading({
+          mask: true
+        });
+        try {
+          let res = await userApi.updatePasswordSenMsg({
+            phone: this.phone
+          });
+          if (res.success) {
+            uni.showToast({
+              title: res.msg
+            });
+            this.timer();
+          }
+        } catch (error) {
+        }
       },
-      submit() {
-        console.log(1)
+      async submit() {
+        if (!this.inputValid({
+          phone: this.phone,
+          code: this.code,
+          password: this.password
+        })) {
+          return;
+        }
+        try {
+          uni.showLoading({
+            mask: true
+          });
+          let res = await userApi.updatePassword({
+            phone: this.phone,
+            code: this.code,
+            password: this.password
+          });
+          if (res.success) {
+            uni.showToast({
+              title: res.msg
+            });
+            this.phone = '';
+            this.password = '';
+            this.code = '';
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: '修改失败'
+            })
+          }
+        } catch (error) {
+        }
       }
     }
   };

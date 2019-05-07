@@ -34,6 +34,24 @@
       background-color: #e1e1e1;
     }
   }
+  .word-list-startBtn{
+    position: relative;
+    margin: auto;
+    margin-top: calc(50vh - 3rem);
+    width: 80%;
+    .word-list-btn{
+      height: 2.5rem;
+      line-height: 2.5rem;
+      background-color: #ff6d2e;
+      border-color: #ff6d2e;
+      color: #fff;
+      font-size: 1.1rem;
+      border-radius: 30px;
+    }
+    .word-list-btnActive{
+      background-color: #fc6500;
+    }
+  }
 }
 
 button::after{

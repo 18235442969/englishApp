@@ -1,17 +1,74 @@
 import service from '../utils/service';
 
 const url = {
-  login: '/login'
+  registerSendMsg: 'User/RegisterSendMsg',
+  register: 'User/Register',
+  login: 'User/Login',
+  updatePasswordSenMsg: 'User/UpdatePasswordSenMsg',
+  updatePassword: 'User/updatePassword',
 }
 
-const login = ({phone, password}) => {
-  const data = {
-    phone,
-    password
+const registerSendMsg = ({ phone }) => {
+  let params = {
+    url: url.registerSendMsg,
+    data: {
+      phone
+    }
   }
-  return service.post(url.login, data);
+  return service(params);
+}
+
+const register = ({ phone, code, password, payPassword, generateCode }) => {
+  let params = {
+    url: url.register,
+    data: {
+      phone,
+      code,
+      password,
+      payPassword,
+      generateCode
+    }
+  }
+  return service(params);
+}
+
+const login = ({ phone, password }) => {
+  let params = {
+    url: url.login,
+    data: {
+      phone,
+      password
+    }
+  }
+  return service(params);
+}
+
+const updatePasswordSenMsg = ({ phone }) => {
+  let params = {
+    url: url.updatePasswordSenMsg,
+    data: {
+      phone
+    }
+  }
+  return service(params);
+}
+
+const updatePassword = ({ phone, password, code }) => {
+  let params = {
+    url: url.updatePassword,
+    data: {
+      phone,
+      password,
+      code
+    }
+  }
+  return service(params);
 }
 
 export default{
-  login
+  registerSendMsg,
+  register,
+  login,
+  updatePasswordSenMsg,
+  updatePassword
 }

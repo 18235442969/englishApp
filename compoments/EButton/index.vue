@@ -14,9 +14,6 @@
 				type: String,
 				default: '确认'
 			},
-			clickBtn: {
-				type: Function
-			},
 			hoverClass: {
 				type: String,
 				default: 'btn-hover'
@@ -37,6 +34,11 @@
 		computed: {
 			eButtonClass() {
 				return this.className ? `e-button ${this.className}` : 'e-button';
+			}
+		},
+		methods: {
+			clickBtn() {
+				this.$emit('clickBtn');
 			}
 		}
 	}

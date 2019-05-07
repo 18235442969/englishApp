@@ -25,7 +25,7 @@
 				</view>
 			</view>
 		</view>
-		<e-button text="登录" :clickBtn="clickBtn" className="login-btn" hoverClass="login-btn-hover"></e-button>
+		<e-button text="登录" @clickBtn="clickBtn" className="login-btn" hoverClass="login-btn-hover"></e-button>
 		<view class="login-nav">
 			<view class="login-nav-left" @click="gotoPage('registe')">
 				新用户注册
@@ -39,52 +39,63 @@
 
 <script>
 	import EButton from '../../compoments/EButton/index.vue';
+	import { inputValid } from '../../mixins/index.js';
+	import { getSign } from '../../utils/auth.js'
 	import valid from '../../utils/valid.js';
 	import userApi from '../../api/user.js';
-	import {mapActions} from 'vuex';
+	import { mapState, mapActions } from 'vuex';
 	const space = 'user'
 	export default {
 		name: 'Login',
+		mixins: [inputValid],
 		components: {
 			EButton
 		},
 		data() {
 			return {
-				phone: '',
-				password: ''
+				phone: '18235442969',
+				password: '654321'
+			}
+		},
+		onLoad() {
+			if (getSign()) {
+				uni.switchTab({
+					url: '/pages/study/index'
+				})
 			}
 		},
 		computed: {
+			...mapState(space, {
+				userInfo: state => state.userInfo
+			})
 		},
 		methods: {
 			...mapActions(space, {
-				changeName: 'changeName'
+				changeUserInfo: 'changeUserInfo'
 			}),
 			async clickBtn() {
-				if (valid.isStrEmpty(this.phone)) {
-					return uni.showToast({
-						icon: 'none',
-						title: '请输入手机号'
-					})
+				if (!this.inputValid({
+					phone: this.phone,
+					password: this.password
+				})) {
+					return;
 				}
-				if (valid.isStrEmpty(this.password)) {
-					return uni.showToast({
-						icon: 'none',
-						title: '请输入密码'
-					})
-				}
+				uni.showLoading({
+					mask: true
+				});
 				try {
-					// let res = await userApi.login();
-					// if (res.success) {
-						this.changeName()
-					// 	uni.switchTab({
-					// 		url: '/pages/study/index'
-					// 	})
-					// } else {
-
-					// }
+					let res = await userApi.login({
+						phone: this.phone,
+						password: this.password
+					});
+					if (res.success) {
+						this.changeUserInfo(res.body);
+						uni.setStorageSync('user-info', res.body);
+						uni.switchTab({
+							url: '/pages/study/index'
+						})
+					}
 				} catch (error) {
-					console.log(error);
 				}
 			},
 			gotoPage(url) {

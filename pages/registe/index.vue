@@ -107,12 +107,12 @@
               placeholder-class="registe-placeholder"
               v-model="referrer"
               placeholder="请输入推荐人ID或手机号"
-              :maxlength="6"
+              :maxlength="20"
             />
           </view>
         </view>
       </view>
-      <e-button className="registe-btn" hoverClass="registe-btn-hover" text="注册" :clickBtn="submit"></e-button>
+      <e-button className="registe-btn" hoverClass="registe-btn-hover" text="注册" @clickBtn="submit"></e-button>
       <view class="registe-tips">
         注册即是同意<text class="registe-tips-agreement">公司服务协议</text>
       </view>
@@ -122,9 +122,11 @@
 
 <script>
   import EButton from '../../compoments/EButton/index.vue';
+  import { inputValid } from '../../mixins/index.js';
   import valid from '../../utils/valid.js';
   import userApi from '../../api/user.js';
   export default {
+    mixins: [inputValid],
     components: {
       EButton
     },
@@ -160,68 +162,61 @@
         }
       },
       async sendCode() {
-        if (valid.isStrEmpty(this.phone)) {
-          return uni.showToast({
-						icon: 'none',
-						title: '请输入手机号'
-					})
+        if (!this.inputValid({
+          phone: this.phone
+        })) {
+          return;
         }
+        uni.showLoading({
+          mask: true
+        });
         try {
-          // let res = await userApi.sendCode();
-          // if (res.success) {
-          //   this.timer();
-          // } else {
-          //   return uni.showToast({
-          //     icon: 'none',
-          //     title: '发送失败'
-          //   })
-          // }
+          let res = await userApi.registerSendMsg({
+            phone: this.phone
+          });
+          if (res.success) {
+            uni.showToast({
+              title: res.msg
+            });
+            this.timer();
+          }
         } catch (error) {
-          
         }
       },
       async submit() {
-        // if (valid.isStrEmpty(this.phone)) {
-        //   return uni.showToast({
-				// 		icon: 'none',
-				// 		title: '请输入手机号'
-				// 	})
-        // }
-        // if (valid.isStrEmpty(this.code)) {
-        //   return uni.showToast({
-				// 		icon: 'none',
-				// 		title: '请输入验证码'
-				// 	})
-        // }
-        // if (valid.isStrEmpty(this.password)) {
-        //   return uni.showToast({
-				// 		icon: 'none',
-				// 		title: '请输入登录密码'
-				// 	})
-        // }
-        // if (valid.isStrEmpty(this.tradePassword)) {
-        //   return uni.showToast({
-				// 		icon: 'none',
-				// 		title: '请输入交易密码'
-				// 	})
-        // }
-        // let res = await userApi.registe();
-        // if (res.success) {
-          // uni.showToast({
-          //   icon: 'none',
-					// 	title: '注册成功',
-          //   mask: true,
-          //   duration: 1000
-          // })
-          // setTimeout(() => {
-          //   this.goBack()
-          // }, 1000);
-        // } else {
-        //   return uni.showToast({
-        //     icon: 'none',
-				// 		title: '注册失败'
-        //   })
-        // }
+        if (!this.inputValid({
+          phone: this.phone,
+          code: this.code,
+          password: this.password,
+          payPassword: this.tradePassword,
+          referrer: this.referrer
+        })) {
+          return;
+        }
+        uni.showLoading({
+          mask: true
+        });
+        try {
+          let res = await userApi.register({
+            phone: this.phone,
+            code: this.code,
+            password: this.password,
+            payPassword: this.tradePassword,
+            generateCode: this.referrer
+          });
+          if (res.success) {
+            uni.showToast({
+              icon: 'none',
+              title: '注册成功',
+              mask: true,
+              duration: 1000
+            })
+            setTimeout(() => {
+              this.goBack()
+            }, 1000);
+          }
+        } catch (error) {
+        }
       }
     }
   };

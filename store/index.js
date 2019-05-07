@@ -3,9 +3,12 @@ import Vuex from 'vuex';
 
 import user from './modules/user.js'
 
+import getters from './getter.js';
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  getters,
   modules: {
     user
   }
