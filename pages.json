@@ -29,6 +29,12 @@
 			}
 		},
 		{
+			"path": "pages/setUserInfo/index",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
 			"path": "pages/book/index",
 			"style": {
 				"navigationBarTitleText": "词库"
@@ -150,6 +156,24 @@
 			"path": "pages/face/index",
 			"style": {
 				"navigationBarTitleText": "刷脸认证"
+			}
+		},
+		{
+			"path": "pages/setTradePassword/index",
+			"style": {
+				"navigationBarTitleText": "设置交易密码"
+			}
+		},
+		{
+			"path": "pages/promote/index",
+			"style": {
+				"navigationBarTitleText": "推广"
+			}
+		},
+		{
+			"path": "pages/registeOther/index",
+			"style": {
+				"navigationBarTitleText": "推广注册"
 			}
 		}
 	],

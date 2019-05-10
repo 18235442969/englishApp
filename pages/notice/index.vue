@@ -1,38 +1,65 @@
 <template>
-  <view class="notice">
-    <view class="notice-item">
-      <view class="notice-icon">·</view>
-      <view class="notice-text">
-        公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务
+  <scroll-view class="notice" :scroll-y="true" @scrolltolower="getMore">
+    <view class="notice-info" v-for="item in noticeList" :key="item.id" @click="gotoDetail(item.id)">
+      <view class="notice-item">
+        <view class="notice-icon">·</view>
+        <view class="notice-text">
+          {{item.title}}
+        </view>
       </view>
     </view>
-    <view class="notice-item">
-      <view class="notice-icon">·</view>
-      <view class="notice-text">
-        公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务
-      </view>
-    </view>
-    <view class="notice-item">
-      <view class="notice-icon">·</view>
-      <view class="notice-text">
-        公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务
-      </view>
-    </view>
-    <view class="notice-item">
-      <view class="notice-icon">·</view>
-      <view class="notice-text">
-        公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务公告服务
-      </view>
-    </view>
-	</view>
+	</scroll-view>
 </template>
 
 <script>
+  import noticeApi from '../../api/notice.js';
   export default {
     data() {
       return {
+        noticeList: [],
+        pageCount: 0,
+        dataCount: 0,
+        pageIndex: 1,
+        pageSize: 20,
+        loadMore: true
       }
-    }
+    },
+    methods: {
+      getMore() {
+        if (this.pageIndex < this.pageCount && this.loadMore) {
+          this.pageIndex++;
+          this.loadMore = false;
+          this.getNoticeList();
+        }
+      },
+      async getNoticeList() {
+        try {
+          let res = await noticeApi.getNoticeList({
+            pageIndex: this.pageIndex,
+            pageSize: this.pageSize
+          });
+          this.loadMore = true;
+          if (res.success) {
+            this.pageCount = res.body.pageCount;
+            this.dataCount = res.body.dataCount;
+            this.noticeList = [...this.noticeList, ...res.body.paging];
+          }
+        } catch (error) {
+          this.loadMore = true;
+        }
+      },
+      gotoDetail(id) {
+        uni.navigateTo({
+          url: `/pages/noticeDetail/index?id=${id}`
+        })
+      }
+    },
+    mounted() {
+      
+    },
+    created() {
+      this.getNoticeList()
+    },
   }
 </script>
 

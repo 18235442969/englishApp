@@ -54,11 +54,12 @@
 		data() {
 			return {
 				phone: '18235442969',
-				password: '654321'
+				password: '123456'
 			}
 		},
 		onLoad() {
-			if (getSign()) {
+			let userInfo = uni.getStorageSync('user-info');
+			if (getSign() && userInfo && userInfo.payPassword && (userInfo.name || userInfo.cardid || userInfo.cardno || userInfo.ebankname || userInfo.alipay)) {
 				uni.switchTab({
 					url: '/pages/study/index'
 				})
@@ -91,9 +92,17 @@
 					if (res.success) {
 						this.changeUserInfo(res.body);
 						uni.setStorageSync('user-info', res.body);
-						uni.switchTab({
-							url: '/pages/study/index'
-						})
+						if (res.body.payPassword) {
+							if ((res.body.name || res.body.cardid || res.body.cardno || res.body.ebankname || res.body.alipay)) {
+								uni.switchTab({
+									url: '/pages/study/index'
+								})
+							} else {
+								this.$go('setUserInfo');
+							}
+						} else {
+							this.$go('setTradePassword');
+						}
 					}
 				} catch (error) {
 				}

@@ -1,0 +1,54 @@
+.set-user-info{
+  .set-user-info-tips{
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row;
+    background-color: #fdfae7;
+    .tips-image{
+      display: flex;
+      align-items: center;
+      .tips-logo{
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+    .tips-text{
+      padding-left: 10px;
+      font-size: 0.7rem;
+      color: #c59575;
+    }
+  }
+  .set-user-info-info{
+    padding: 0 15px;
+    .set-user-info-info-line{
+      margin-top: 0.5rem;
+      padding: 5px 0;
+      border-bottom: 1px solid #ffc67e;
+    }
+  }
+  .uni-list{
+    margin-top: 10px;
+    padding: 0 15px;
+    font-size: 0.8rem;
+    color: #f95e00;
+  }
+}
+
+
+.set-user-info-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 3px;
+  color: #000;
+  font-size: 0.85rem;
+}
+
+.set-user-info-placeholder {
+  color: #b6b7b8;
+}
+
+.else-text{
+  word-wrap:break-word;
+  font-size: 0.85rem;
+  color: #7d7d7d;
+}

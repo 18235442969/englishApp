@@ -36,7 +36,9 @@
 	import EButton from '../../compoments/EButton/index.vue';
 	import { getSign } from '../../utils/auth.js';
 	import wordApi from '../../api/word.js';
-	import { mapGetters } from 'vuex';
+	import userApi from '../../api/user.js';
+	import { mapGetters, mapActions } from 'vuex';
+	const space = 'user';
 	export default {
 		components: {
 			EButton
@@ -51,6 +53,9 @@
 			})
 		},
 		methods: {
+			...mapActions(space, {
+				changeUserInfo: 'changeUserInfo'
+			}),
 			clickBtn() {
 				if (this.userInfo.typeId) {
 					this.startStudy();
@@ -65,10 +70,10 @@
 				let time = uni.getStorageSync('word-list-time') || '';
 				let wordList = uni.getStorageSync('word-list');
 				if (!time || (!wordList || wordList.length === 0)) {
-					return true
+					return true;
 				} else {
-					let date = new Date(new Date().toLocaleDateString()).getTime()
-					return date === time ? false : true
+					let date = new Date(new Date().toLocaleDateString()).getTime();
+					return date === time ? false : true;
 				}
 			},
 			startStudy() {
@@ -110,9 +115,22 @@
 					}
 				} catch (error) {
 				}
+			},
+			async getUserInfo() {
+				try {
+					let res = await userApi.getUserInfo();
+					if (res.success) {
+						this.changeUserInfo(res.body);
+						uni.setStorageSync('user-info', res.body);
+					}
+				} catch (error) {
+				}
 			}
 		},
-		mounted () {
+		mounted() {
+		},
+		onShow() {
+			this.getUserInfo();
 		}
 	}
 </script>

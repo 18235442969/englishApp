@@ -26,7 +26,7 @@
         </view>
       </view>
       
-      <view class="code">
+      <!-- <view class="code">
         <view class="registe-line">
           <view class="input-icon">
             <icon-font
@@ -48,7 +48,7 @@
             {{sendCodeText}}
           </view>
         </view>
-      </view>
+      </view> -->
 
       <view class="password">
         <view class="registe-line">
@@ -81,7 +81,7 @@
           </view>
           <view class="input-input">
             <input
-              type="password"
+              type="number"
               class="registe-input"
               placeholder-class="registe-placeholder"
               v-model="tradePassword"
@@ -186,7 +186,7 @@
       async submit() {
         if (!this.inputValid({
           phone: this.phone,
-          code: this.code,
+          // code: this.code,
           password: this.password,
           payPassword: this.tradePassword,
           referrer: this.referrer
@@ -199,7 +199,7 @@
         try {
           let res = await userApi.register({
             phone: this.phone,
-            code: this.code,
+            // code: this.code,
             password: this.password,
             payPassword: this.tradePassword,
             generateCode: this.referrer

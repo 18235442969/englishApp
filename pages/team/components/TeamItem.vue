@@ -2,20 +2,20 @@
   <view class="team-item">
     <view class="team-user-info">
       <view class="team-user-info-name">
-        芳华兽
+        {{user.name}}
       </view>
       <view class="team-user-info-id">
-        ID:123562
+        ID:{{user.userid}}
       </view>
     </view>
     <view class="team-user-leave">
       <view class="team-user-leave-info">
         <img src="../../../asstes/images/team-leave.png" class="team-img"/>
-        一级班长
+        {{leaveName}}
       </view>
       <view class="team-user-leave-number">
         <img src="../../../asstes/images/team.png" class="team-img" />
-        团队人数:15
+        团队人数:{{user.count}}
       </view>
     </view>
   </view>
@@ -23,10 +23,21 @@
 
 <script>
   export default {
+    name: 'TeamItem',
+    props: ['user'],
+    computed: {
+      leaveName() {
+        const object = ['普通会员', '一级班长', '二级班长', '三级班长', '四级班长'];
+        return object[this.user.integral];
+      }
+    },
     data() {
       return {
         
       }
+    },
+    mounted () {
+      console.log(this.user)
     }
   }
 </script>

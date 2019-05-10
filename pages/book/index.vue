@@ -62,12 +62,14 @@
         changeUserInfo: 'changeUserInfo'
       }),
       async getBooks() {
+        uni.showLoading({
+          mask: true
+        });
         try {
           let res = await wordApi.thesaurus();
           let data = res.body;
           let obj = {};
           this.typeList[0].img = data.imgUrl[0].img;
-          console.log(data.imgUrl[0].img)
           let typeList = data.list.map(e => {
             return {
               id: e.parentId,

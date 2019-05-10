@@ -2,7 +2,18 @@
   <view class="userinfo">
     <top-line></top-line>
     <view class='user-info-list'>
-      <view class="user-info-item" @click="gotoPage('realName')">
+      <view class="user-info-item" @click="gotoPage('setUserInfo')">
+        <view class="user-info-item-icon">
+          <icon-font className="icongerenxinxi" />
+        </view>
+        <view class="user-info-item-text">
+          个人信息
+        </view>
+        <view class="user-info-item-right">
+          <icon-font className="iconyoujiantou" />
+        </view>
+      </view>
+      <!-- <view class="user-info-item" @click="gotoPage('realName')">
         <view class="user-info-item-icon">
           <icon-font className="iconshenfenzhengdaiquan" />
         </view>
@@ -36,7 +47,7 @@
           已认证
           <icon-font className="iconyoujiantou" />
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
@@ -53,9 +64,13 @@
     },
     methods: {
       gotoPage(url) {
-        uni.navigateTo({
-          url: `/pages/${url}/index`
-        })
+        if (url === 'setUserInfo') {
+          uni.navigateTo({
+            url: `/pages/setUserInfo/index?isShow=true`
+          })
+        } else {
+          this.$go(url);
+        }
       }
     }
   }
@@ -76,6 +91,10 @@
   }
   .iconyoujiantou{
     font-size: 0.8rem !important;
+  }
+  .icongerenxinxi{
+    color: #44D0FF;
+    font-size: 1.1rem !important;
   }
 </style>
 

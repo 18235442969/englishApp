@@ -185,7 +185,8 @@ const isStrEmpty = (str) => {
  * @param  {[string]} password [密码]
  */
 const passwordValid = (password) => {
-    let reg = /^(?![^a-zA-Z]+$)(?!\D+$)/;
+    // let reg = /^(?![^a-zA-Z]+$)(?!\D+$)/;
+    let reg = /^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)\S{8,16}$/;
     return reg.test(password);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,7 +212,7 @@ const isNumber = (value, few) => {
         return false;
     }
     if (few) {
-        return (numberValue+'').split('.')[1] && (numberValue+'').split('.')[1].length > 4 ? false : true;
+        return (numberValue+'').split('.')[1] && (numberValue+'').split('.')[1].length > few ? false : true;
     }
     return true;
 }

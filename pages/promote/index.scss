@@ -1,0 +1,36 @@
+.promote{
+  .qrcode{
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    width:80vw;
+    height: 80vw;
+  }
+  .promote-info{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: 15px;
+    width:80vw;
+    height: 2.3rem;
+    line-height: 2.3rem;
+    border: 1px solid #a4a5a5;
+    color: #a1a3a4;
+    .promote-info-text{
+      width: 70%;
+      padding: 0 10px;
+      font-size: 0.9rem;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap
+    }
+    .promote-info-btn{
+      padding: 0 10px;
+      width: 30%;
+      text-align: center;
+      background-color: #eeeeef;
+      color: #010508;
+      font-size: 0.85rem;
+    }
+  }
+}

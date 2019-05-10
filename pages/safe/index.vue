@@ -13,7 +13,7 @@
           <icon-font className="iconyoujiantou" />
         </view>
       </view>
-      <view class="safe-item">
+      <view class="safe-item" @click="gotoPage('changeTradePassword')">
         <view class="safe-item-icon">
           <icon-font className="iconjiaoyi" />
         </view>

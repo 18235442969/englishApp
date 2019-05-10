@@ -5,11 +5,11 @@
       <view class="user-top">
         <view class="user-leave">
           <img src="../../asstes/images/user-leave.png" class="user-leave-logo"/>
-          <text :decode="true"> 一级班长</text>
+          <text :decode="true"> {{leaveName}}</text>
         </view>
       </view>
-      <view class="user-name">Baby爱英语</view>
-      <view class="user-id">id:123456789</view>
+      <view class="user-name">{{name}}</view>
+      <view class="user-id">id:{{userId}}</view>
     </view>
     <view class="user-info">
       <view class="user-info-item">
@@ -17,7 +17,7 @@
           链上资产
         </view>
         <view class="user-info-item-center">
-          100
+          {{upMoney}}
         </view>
         <view class="user-info-item-bottom">
           点券
@@ -28,7 +28,7 @@
           钱包余额
         </view>
         <view class="user-info-item-center">
-          2351.01
+          {{balance}}
         </view>
         <view class="user-info-item-bottom">
           <img src="../../asstes/images/user-money.png" class="user-money">
@@ -39,7 +39,7 @@
           可售额度
         </view>
         <view class="user-info-item-center">
-          6784.12
+          {{saleMoney}}
         </view>
         <view class="user-info-item-bottom">
           点券
@@ -70,7 +70,7 @@
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
         </view>
-        <view class="user-item-nav" @click="gotoPage('tradeRecord')">
+        <!-- <view class="user-item-nav" @click="gotoPage('tradeRecord')">
           <view class="user-item-nav-icon">
             <icon-font className="icondingdan" />
           </view>
@@ -91,8 +91,8 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view>
-        <view class="user-item-nav" @click="gotoPage('rewardsRelease')">
+        </view> -->
+        <!-- <view class="user-item-nav" @click="gotoPage('rewardsRelease')">
           <view class="user-item-nav-icon">
             <icon-font className="iconjiangli2" />
           </view>
@@ -102,7 +102,18 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view>
+        </view> -->
+        <!-- <view class="user-item-nav" @click="gotoPage('notice')">
+          <view class="user-item-nav-icon">
+            <icon-font className="iconweibiaoti5" />
+          </view>
+          <view class="user-item-nav-text">
+            上链记录
+          </view>
+          <view class="user-item-nav-right">
+            <icon-font className="iconyoujiantou" fontClass="right-icon"/>
+          </view>
+        </view> -->
         <view class="user-item-nav" @click="gotoPage('notice')">
           <view class="user-item-nav-icon">
             <icon-font className="iconfuwu" />
@@ -136,16 +147,42 @@
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
         </view>
+        <view class="user-item-nav" @click="gotoPage('registeOther')">
+          <view class="user-item-nav-icon">
+            <icon-font className="icontuijianren1" />
+          </view>
+          <view class="user-item-nav-text">
+            推广注册
+          </view>
+          <view class="user-item-nav-right">
+            <icon-font className="iconyoujiantou" fontClass="right-icon"/>
+          </view>
+        </view>
       </view>
     </view>
 	</view>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     data() {
       return {
-
+        name: '',
+        leave: 0,
+        upMoney: 0,
+        balance: 0,
+        saleMoney: 0,
+        userId: '0'
+      }
+    },
+    computed: {
+      ...mapGetters({
+        userInfo: 'userInfo'
+      }),
+      leaveName() {
+        const object = ['普通会员', '一级班长', '二级班长', '三级班长', '四级班长'];
+        return object[this.leave];
       }
     },
     methods: {
@@ -154,12 +191,21 @@
           url: `/pages/${url}/index`
         })
       }
+    },
+    onShow() {
+      let userInfo = this.userInfo || uni.getStorageSync('user-info') || {};
+      this.name = userInfo.name;
+      this.leave = userInfo.integral;
+      this.userId = userInfo.userId;
+      this.upMoney = userInfo.amount;
+      this.balance = userInfo.total;
+      this.saleMoney = userInfo.csTotal;
     }
   }
 </script>
 
 <style>
-  .icongerenxinxi, .icontuandui, .icondingdan, .iconqiandai, .iconjiangli2, .iconfuwu, .iconanquan, .icontuiguangdingdan{
+  .icongerenxinxi, .icontuandui, .icondingdan, .iconqiandai, .iconjiangli2, .iconfuwu, .iconanquan, .icontuiguangdingdan, .iconweibiaoti5, .icontuijianren1{
     color: #ef9700;
     font-size: 1.1rem !important;
   }
@@ -183,6 +229,9 @@
   }
   .icontuiguangdingdan{
     color: #5cb1f4;
+  }
+  .iconweibiaoti5{
+    color: #547AFE;
   }
   .right-icon{
     font-size: 0.9rem !important;

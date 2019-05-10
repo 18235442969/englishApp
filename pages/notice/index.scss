@@ -1,18 +1,23 @@
 .notice{
-  padding: 0 10px;
-  .notice-item{
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid #eeeff1;
-    padding: 0.7rem 0;
-    font-size: 0.85rem;
-    .notice-icon{
-      color: #ffad99;
-    }
-    .notice-text{
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  .notice-info{
+    padding: 0 0.5rem;
+    .notice-item{
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid #eeeff1;
+      padding: 0.7rem 0;
+      font-size: 0.85rem;
+      .notice-icon{
+        color: #ffad99;
+      }
+      .notice-text{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
