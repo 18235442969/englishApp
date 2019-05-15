@@ -2,7 +2,7 @@
   <view class="team-item">
     <view class="team-user-info">
       <view class="team-user-info-name">
-        {{user.name}}
+        {{user.name ? user.name : ''}}
       </view>
       <view class="team-user-info-id">
         ID:{{user.userid}}
@@ -37,7 +37,6 @@
       }
     },
     mounted () {
-      console.log(this.user)
     }
   }
 </script>

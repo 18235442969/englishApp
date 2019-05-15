@@ -69,7 +69,8 @@
 			timeOut() {
 				let time = uni.getStorageSync('word-list-time') || '';
 				let wordList = uni.getStorageSync('word-list');
-				if (!time || (!wordList || wordList.length === 0)) {
+				let wordNum = uni.getStorageSync('word-num') || 0;
+				if (!time || (!wordList || wordList.length === 0 || wordList.length < wordNum)) {
 					return true;
 				} else {
 					let date = new Date(new Date().toLocaleDateString()).getTime();
@@ -103,6 +104,7 @@
 						let date = new Date(new Date().toLocaleDateString()).getTime();
 						uni.setStorageSync('word-list-time', date);
 						uni.setStorageSync('word-list', res.body.list);
+						uni.setStorageSync('word-num', res.body.listNum[0].count);
 						if (res.body.list.length === 0) {
 							uni.showModal({
 								title: '英语链',

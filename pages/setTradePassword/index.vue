@@ -2,7 +2,7 @@
   <view class="set-trade-password">
     <view class="set-trade-password-info">
       <view class="set-trade-password-info-line">
-        <input type="number" class="set-trade-password-input" placeholder-class="set-trade-password-placeholder" v-model="password" placeholder="请输入交易密码" :maxlength="6" />
+        <input type="number" class="set-trade-password-input" placeholder-class="set-trade-password-placeholder" v-model="password" placeholder="请输入6位交易密码" :maxlength="6" />
       </view>
     </view>
     <e-button text="确认" className="change-password-btn" @clickBtn="submit"></e-button>
@@ -34,6 +34,13 @@
           payPassword: this.password
         })) {
           return;
+        }
+        if (this.password.trim().length !== 6) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '请输入6位交易密码'
+          });
         }
         try {
           let res = await userApi.setPayPassword({

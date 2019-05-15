@@ -49,14 +49,18 @@
         </view>
       </view> -->
     </view>
+    <e-button text="退出登录" className="exit-btn" @clickBtn="exit"></e-button>
   </view>
 </template>
 
 <script>
   import TopLine from '../../compoments/TopLine/index.vue';
+  import EButton from '../../compoments/EButton/index.vue';
+  import { removeSign } from '../../utils/auth.js';
   export default {
     components: {
-      TopLine
+      TopLine,
+      EButton
     },
     data() {
       return {
@@ -71,6 +75,20 @@
         } else {
           this.$go(url);
         }
+      },
+      exit() {
+        uni.showModal({
+          title: '提示',
+          content: '您确定要退出登录吗?',
+          success: function(res) {
+            if (res.confirm) {
+              removeSign();
+              uni.reLaunch({
+                url: '/pages/login/index'
+              });
+            }
+          }
+        });
       }
     }
   }
@@ -95,6 +113,9 @@
   .icongerenxinxi{
     color: #44D0FF;
     font-size: 1.1rem !important;
+  }
+  .exit-btn{
+    margin-top: 1.5rem;
   }
 </style>
 

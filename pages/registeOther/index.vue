@@ -19,7 +19,7 @@
 
 <script>
   import TopLine from '../../compoments/TopLine/index.vue';
-  import EButton from '../../compoments/EButton/index.vue';
+  import EButton from '../../compoments/EButton/index.vue'; 
   import valid from '../../utils/valid.js';
   import userApi from '../../api/user.js';
   export default {
@@ -45,6 +45,20 @@
             mask: true,
             icon: 'none',
             title: '请输入正确的手机号'
+          });
+        }
+        if (!valid.isPhone(this.phone)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '手机号格式不正确'
+          });
+        }
+        if (!valid.passwordValid(this.password)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '登录密码需要同时包含字母和数字'
           });
         }
         try {

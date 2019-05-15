@@ -24,12 +24,12 @@ const registerSendMsg = ({ phone }) => {
   return service(params);
 }
 
-const register = ({ phone, code, password, payPassword, generateCode }) => {
+const register = ({ phone, password, payPassword, generateCode }) => {
   let params = {
     url: url.register,
     data: {
       phone,
-      code,
+      // code,
       password,
       payPassword,
       generateCode

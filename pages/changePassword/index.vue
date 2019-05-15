@@ -7,7 +7,7 @@
 			</view>
       <view class="input-line code-line">
         <view class="code-input">
-          <input type="number" class="change-password-input" placeholder-class="change-password-placeholder" v-model="code" placeholder="请输入验证码" :maxlength="6" />
+          <input type="number" class="change-password-input" placeholder-class="change-password-placeholder" v-model="code" placeholder="请输入验证码" :maxlength="4" />
         </view>
         <view :class="codeSend ? 'code-send-text' : 'code-text'" @click="sendCode">
           {{sendCodeText}}
@@ -57,22 +57,23 @@
         this.passworType = this.passworType === 'password' ? 'text' : 'password';
       },
       timer() {
-        if (!this.codeSend) {
-          let startTime = 3;
+        let startTime = 60;
+        this.sendCodeText = `${startTime}s`;
+        let timeInterval = setInterval(() => {
+          startTime--;
           this.sendCodeText = `${startTime}s`;
-          let timeInterval = setInterval(() => {
-            startTime--;
-            this.sendCodeText = `${startTime}s`;
-            if (startTime === 0) {
-              clearInterval(timeInterval);
-              this.sendCodeText = '获取验证码';
-              this.codeSend = false;
-            }
-          }, 1000);
-          this.codeSend = true;
-        }
+          if (startTime === 0) {
+            clearInterval(timeInterval);
+            this.sendCodeText = '获取验证码';
+            this.codeSend = false;
+          }
+        }, 1000);
+        this.codeSend = true;
       },
       async sendCode() {
+        if (this.codeSend) {
+          return;
+        }
         if (!this.inputValid({
           phone: this.phone
         })) {

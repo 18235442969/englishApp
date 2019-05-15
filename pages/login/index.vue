@@ -54,7 +54,7 @@
 		data() {
 			return {
 				phone: '18235442969',
-				password: '123456'
+				password: 'aaa123456'
 			}
 		},
 		onLoad() {
@@ -81,6 +81,20 @@
 				})) {
 					return;
 				}
+				if (!valid.isPhone(this.phone)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '手机号格式不正确'
+          });
+        }
+        if (!valid.passwordValid(this.password)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '登录密码格式不正确'
+          });
+        }
 				uni.showLoading({
 					mask: true
 				});

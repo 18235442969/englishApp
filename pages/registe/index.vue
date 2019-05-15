@@ -26,7 +26,7 @@
         </view>
       </view>
       
-      <!-- <view class="code">
+      <view class="code">
         <view class="registe-line">
           <view class="input-icon">
             <icon-font
@@ -41,14 +41,14 @@
               placeholder-class="registe-placeholder"
               v-model="code"
               placeholder="请输入验证码"
-              :maxlength="6"
+              :maxlength="4"
             />
           </view>
           <view :class="codeSend ? 'input-send-text' : 'input-text'" @click="sendCode">
             {{sendCodeText}}
           </view>
         </view>
-      </view> -->
+      </view>
 
       <view class="password">
         <view class="registe-line">
@@ -146,22 +146,23 @@
         uni.navigateBack();
       },
       timer() {
-        if (!this.codeSend) {
-          let startTime = 3;
+        let startTime = 60;
+        this.sendCodeText = `${startTime}s`;
+        let timeInterval = setInterval(() => {
+          startTime--;
           this.sendCodeText = `${startTime}s`;
-          let timeInterval = setInterval(() => {
-            startTime--;
-            this.sendCodeText = `${startTime}s`;
-            if (startTime === 0) {
-              clearInterval(timeInterval);
-              this.sendCodeText = '获取验证码';
-              this.codeSend = false;
-            }
-          }, 1000);
-          this.codeSend = true;
-        }
+          if (startTime === 0) {
+            clearInterval(timeInterval);
+            this.sendCodeText = '获取验证码';
+            this.codeSend = false;
+          }
+        }, 1000);
+        this.codeSend = true;
       },
       async sendCode() {
+        if (this.codeSend) {
+          return;
+        }
         if (!this.inputValid({
           phone: this.phone
         })) {
@@ -186,12 +187,33 @@
       async submit() {
         if (!this.inputValid({
           phone: this.phone,
-          // code: this.code,
+          code: this.code,
           password: this.password,
           payPassword: this.tradePassword,
           referrer: this.referrer
         })) {
           return;
+        }
+        if (!valid.isPhone(this.phone)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '手机号格式不正确'
+          });
+        }
+        if (!valid.passwordValid(this.password)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '登录密码需要同时包含字母和数字'
+          });
+        }
+        if (this.tradePassword.trim().length !== 6) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '请输入6位交易密码'
+          });
         }
         uni.showLoading({
           mask: true
@@ -199,7 +221,7 @@
         try {
           let res = await userApi.register({
             phone: this.phone,
-            // code: this.code,
+            code: this.code,
             password: this.password,
             payPassword: this.tradePassword,
             generateCode: this.referrer

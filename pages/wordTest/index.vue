@@ -132,14 +132,14 @@
       },
       getNextWord() {
         setTimeout(() => {
-          let index = this.index;
-          if (index < this.wordTestList.length-1) {
-            let word = this.wordTestList[index+1];
+          let index = this.index + 1;
+          this.index = index;
+          if (index < this.wordTestList.length) {
+            let word = this.wordTestList[index];
             word.chooseAnswerClass = {};
             this.word = word;
-            this.index = index + 1;
           }
-          if (this.index === this.wordTestList.length-1) {
+          if (this.index === this.wordTestList.length) {
             let wordList = uni.getStorageSync('word-list') || [];
             uni.setStorageSync('word-list', wordList.map(e => {
               e.learn = true;
