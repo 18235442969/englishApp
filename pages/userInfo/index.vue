@@ -83,6 +83,8 @@
           success: function(res) {
             if (res.confirm) {
               removeSign();
+              uni.removeStorageSync('word-list');
+              uni.removeStorageSync('word-list-time');
               uni.reLaunch({
                 url: '/pages/login/index'
               });

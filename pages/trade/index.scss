@@ -62,16 +62,28 @@
   .trade-cancelled{
     display: flex;
     padding: 0 15px;
+    margin-top: 20vh;
     .trade-cancelled-new, .trade-cancelled-standard{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       flex-grow: 1;
       width: 50%;
-      background-color: #f88c36;
+      height: 7rem;
+      background-color: #fd9d50;
+      color: #fae365;
+      font-size: 1rem;
       .trade-cancelled-new-logo, .trade-cancelled-standard-logo{
         .trade-cancelled-new-img, .trade-cancelled-standard-logo{
-          width: 1rem;
-          height: 1rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          margin-bottom: 3px;
         }
       }
+    }
+    .trade-cancelled-standard{
+      border-left: 1px solid #ffad6c;
     }
   }
 }

@@ -5,7 +5,7 @@
         释放时间
       </view>
       <view class="release-item-bottom release-item-start release-item-time">
-        2019-4-11 16:57:23
+        {{release.createTime | timeFilter}}
       </view>
     </view>
     <view class="release-item-center">
@@ -13,16 +13,16 @@
         释放金额
       </view>
       <view class="release-item-bottom">
-        2000
+        {{release.total}}
       </view>
     </view>
     <view class="release-item-fill"></view>
     <view class="release-item-right">
-      <view class="release-item-middle release-item-start">
+      <view class="release-item-middle release-item-start release-item-num">
         资产基数
       </view>
-      <view class="release-item-bottom release-item-start">
-        2200
+      <view class="release-item-bottom release-item-start release-item-num">
+        {{release.amount}}
       </view>
     </view>
   </view>
@@ -30,9 +30,14 @@
 
 <script>
   export default {
+    props: ['release'],
     data() {
       return {
-        
+      }
+    },
+    filters: {
+      timeFilter(val) {
+        return val.replace(/T/g, ' ').replace(/-/g, '/');
       }
     }
   }
@@ -64,6 +69,9 @@
       }
       .release-item-start{
         justify-content: flex-start;
+      }
+      .release-item-num{
+        justify-content: flex-end;
       }
       .release-item-time{
         font-size: 0.65rem;

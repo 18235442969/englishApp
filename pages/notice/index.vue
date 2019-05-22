@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="notice" :scroll-y="true" @scrolltolower="getMore">
+  <scroll-view class="notice" :scroll-y="true" @scrolltolower="getMore" :lower-threshold="100">
     <view class="notice-info" v-for="item in noticeList" :key="item.id" @click="gotoDetail(item.id)">
       <view class="notice-item">
         <view class="notice-icon">·</view>

@@ -2,7 +2,7 @@
   <view class="team-item">
     <view class="team-user-info">
       <view class="team-user-info-name">
-        {{user.name ? user.name : ''}}
+        {{user.phone}}
       </view>
       <view class="team-user-info-id">
         ID:{{user.userid}}
@@ -28,7 +28,7 @@
     computed: {
       leaveName() {
         const object = ['普通会员', '一级班长', '二级班长', '三级班长', '四级班长'];
-        return object[this.user.integral];
+        return this.user.integral === -1 ? '注册会员' : object[this.user.integral];
       }
     },
     data() {

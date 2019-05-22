@@ -1,5 +1,5 @@
 <template>
-	<view class="login">
+	<view class="login" v-if="loginShow">
 		<view class="status_bar">
 		</view>
 		<img src="../../asstes/images/logo.png" class="logo"/>
@@ -35,6 +35,8 @@
 			</view>
 		</view>
 	</view>
+	<view v-else>
+	</view>
 </template>
 
 <script>
@@ -53,16 +55,9 @@
 		},
 		data() {
 			return {
-				phone: '18235442969',
-				password: 'aaa123456'
-			}
-		},
-		onLoad() {
-			let userInfo = uni.getStorageSync('user-info');
-			if (getSign() && userInfo && userInfo.payPassword && (userInfo.name || userInfo.cardid || userInfo.cardno || userInfo.ebankname || userInfo.alipay)) {
-				uni.switchTab({
-					url: '/pages/study/index'
-				})
+				loginShow: false,
+				phone: '',
+				password: ''
 			}
 		},
 		computed: {
@@ -126,6 +121,15 @@
 					url: `/pages/${url}/index`
 				})
 			}
+		},
+		onLoad() {
+			let userInfo = uni.getStorageSync('user-info');
+			if (getSign() && userInfo && userInfo.payPassword && (userInfo.name || userInfo.cardid || userInfo.cardno || userInfo.ebankname || userInfo.alipay)) {
+				uni.switchTab({
+					url: '/pages/study/index'
+				})
+			}
+			this.loginShow = true;
 		}
 	}
 </script>

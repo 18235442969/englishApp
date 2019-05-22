@@ -213,8 +213,9 @@ const isNumber = (value, few) => {
     }
     if (few) {
         return (numberValue+'').split('.')[1] && (numberValue+'').split('.')[1].length > few ? false : true;
+    } else {
+        return (numberValue+'').split('.')[1] ? false : true;
     }
-    return true;
 }
 export default {
     idCardValidate,

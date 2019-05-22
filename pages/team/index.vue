@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="team" :scroll-y="true" @scrolltolower="getMore">
+  <scroll-view class="team" :scroll-y="true" @scrolltolower="getMore" :lower-threshold="100">
     <view class="team-list" v-if="teamList.length > 0">
       <team-item v-for="i in teamList" :key="i.userid" :user="i"></team-item>
     </view>
@@ -20,7 +20,7 @@
     },
     data() {
       return {
-        pageSize: 15,
+        pageSize: 20,
         pageIndex: 1,
         pageCount: 0,
         teamList: [],
@@ -34,11 +34,13 @@
             pageSize: this.pageSize,
             pageIndex: this.pageIndex
           });
+          this.loadMore = true;
           if (res.success) {
             this.pageCount = res.body.pageCount;
             this.teamList = [...this.teamList, ...res.body.paging];
           }
         } catch (error) {
+          this.loadMore = true;
         }
       },
       getMore() {

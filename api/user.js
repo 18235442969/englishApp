@@ -11,7 +11,13 @@ const url = {
   updatePayPassword: 'UserInfo/UpdatePayPassword',
   updateUserInfo: 'UserInfo/UpdateUserInfo',
   getUserMyfamilyDB: 'UserInfo/GetUserMyfamilyDB',
-  userRegister: 'UserInfo/Register'
+  userRegister: 'UserInfo/Register',
+  upAmount: 'UserInfo/UpAmount',
+  getAmountList: 'UserInfo/GetAmountList',
+  getRecommendList: 'UserInfo/GetRecommendList',
+  getRechargeList: 'UserInfo/GetRechargeList',
+  getReleaseList: 'UserInfo/GetReleaseList',
+
 }
 
 const registerSendMsg = ({ phone }) => {
@@ -24,12 +30,12 @@ const registerSendMsg = ({ phone }) => {
   return service(params);
 }
 
-const register = ({ phone, password, payPassword, generateCode }) => {
+const register = ({ phone, password, code, payPassword, generateCode }) => {
   let params = {
     url: url.register,
     data: {
       phone,
-      // code,
+      code,
       password,
       payPassword,
       generateCode
@@ -136,6 +142,60 @@ const userRegister = ({phone, password}) => {
   return service(params);
 }
 
+const upAmount = ({total}) => {
+  let params = {
+    url: url.upAmount,
+    data: {
+      total
+    }
+  }
+  return service(params);
+}
+
+const getAmountList = ({pageIndex, pageSize}) => {
+  let params = {
+    url: url.getAmountList,
+    data: {
+      requestPage: pageIndex,
+      pagesize: pageSize
+    }
+  }
+  return service(params);
+}
+
+const getRecommendList = ({pageIndex, pageSize}) => {
+  let params = {
+    url: url.getRecommendList,
+    data: {
+      requestPage: pageIndex,
+      pagesize: pageSize
+    }
+  }
+  return service(params);
+}
+
+const getRechargeList = ({pageIndex, pageSize}) => {
+  let params = {
+    url: url.getRechargeList,
+    data: {
+      requestPage: pageIndex,
+      pagesize: pageSize
+    }
+  }
+  return service(params);
+}
+
+const getReleaseList = ({pageIndex, pageSize}) => {
+  let params = {
+    url: url.getReleaseList,
+    data: {
+      requestPage: pageIndex,
+      pagesize: pageSize
+    }
+  }
+  return service(params);
+}
+
 export default{
   registerSendMsg,
   register,
@@ -147,5 +207,10 @@ export default{
   updateUserInfo,
   updatePayPassword,
   getUserMyfamilyDB,
-  userRegister
+  userRegister,
+  upAmount,
+  getAmountList,
+  getRecommendList,
+  getRechargeList,
+  getReleaseList
 }

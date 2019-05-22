@@ -58,20 +58,29 @@
 				"navigationBarTitleText": "测试"
 			}
 		},
-		// {
-		// 	"path": "pages/trade/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "交易",
-		// 		"navigationStyle": "custom",
-		// 		"app-plus":{
-		// 			"titleNView": false
-		// 		}
-		// 	}
-		// },
+		{
+			"path": "pages/trade/index",
+			"style": {
+				"navigationBarTitleText": "交易",
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/putUpOrder/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		},
 		{
 			"path": "pages/user/index",
 			"style": {
-				"navigationBarTitleText": "我的",
+				"navigationBarTitleText": "会员",
 				"navigationStyle": "custom",
 				"app-plus":{
 					"titleNView": false
@@ -103,17 +112,19 @@
 		{
 			"path": "pages/recordeRelease/index",
 			"style": {
-				"navigationBarTitleText": "释放记录",
-				"navigationStyle": "custom",
-				"app-plus":{
-					"titleNView": false
-				}
+				"navigationBarTitleText": "释放记录"
 			}
 		},
 		{
 			"path": "pages/rewardsRelease/index",
 			"style": {
 				"navigationBarTitleText": "奖励记录"
+			}
+		},
+		{
+			"path": "pages/onChain/index",
+			"style": {
+				"navigationBarTitleText": "上链记录"
 			}
 		},
 		{
@@ -189,22 +200,23 @@
 			"selectedColor": "#ec5b00",
 			"backgroundColor": "#ffffff",
 			"list": [
-			// 	{
-			// 		"pagePath": "pages/trade/index",
-			// 		"iconPath": "static/images/trade.png",
-			// 		"selectedIconPath": "static/images/tradeSelect.png",
-			// 		"text": "交易"
-			// },
 			{
 					"pagePath": "pages/study/index",
 					"iconPath": "static/images/study.png",
 					"selectedIconPath": "static/images/studySelect.png",
 					"text": "学习"
-			},{
+			}
+			// ,{
+			// 		"pagePath": "pages/trade/index",
+			// 		"iconPath": "static/images/trade.png",
+			// 		"selectedIconPath": "static/images/tradeSelect.png",
+			// 		"text": "交易"
+			// }
+			,{
 					"pagePath": "pages/user/index",
 					"iconPath": "static/images/user.png",
 					"selectedIconPath": "static/images/userSelect.png",
-					"text": "我的"
+					"text": "会员"
 			}]
 	}
 }

@@ -108,7 +108,7 @@
 						if (res.body.list.length === 0) {
 							uni.showModal({
 								title: '英语链',
-								content: '您今天已学习完毕',
+								content: '当前词库已学习完毕，请切换词库',
 								showCancel: false
 							})
 						} else {

@@ -19,7 +19,7 @@
         </view>
       </view>
     </view>
-    <view class="trade-chart">
+    <!-- <view class="trade-chart">
       <view class="trade-chart-btn-list">
         <view class="trade-chart-btn trade-chart-btn-choose">
           日线
@@ -28,19 +28,19 @@
           月线
         </view>
       </view>
-    </view>
+    </view> -->
     <view class="trade-cancelled">
-      <view class="trade-cancelled-new">
+      <view class="trade-cancelled-new" @click="gotoPage('young')">
         <view class="trade-cancelled-new-logo">
-          <img src="../../asstes/images/logo.png" class="trade-cancelled-new-img"/>
+          <img src="../../asstes/images/young.png" class="trade-cancelled-new-img"/>
         </view>
-        新手挂单
+        小蜜蜂
       </view>
-      <view class="trade-cancelled-standard">
+      <view class="trade-cancelled-standard" @click="gotoPage('standard')">
         <view class="trade-cancelled-standard-logo">
-          <img src="../../asstes/images/logo.png" class="trade-cancelled-new-img"/>
+          <img src="../../asstes/images/standard.png" class="trade-cancelled-new-img"/>
         </view>
-        标准挂单
+        大蜜蜂
       </view>
     </view>
 	</view>
@@ -50,6 +50,13 @@
   export default {
     data() {
       return {
+      }
+    },
+    methods: {
+      gotoPage(id) {
+        uni.navigateTo({
+          url: `/pages/putUpOrder/index?id=${id}`
+        });
       }
     }
   }

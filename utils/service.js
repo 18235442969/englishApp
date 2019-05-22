@@ -6,7 +6,7 @@ export default ({url, method='GET', data={}, header}) => {
     'content-type': 'application/json',
     'sigin': getSign() || ''
   }
-  console.log(`http ${method || 'GET'} --> ${config.baseUrl}${url} sign: ${serviceHeader.sigin} data: `, data)
+  // console.log(`http ${method || 'GET'} --> ${config.baseUrl}${url} sign: ${serviceHeader.sigin} data: `, data)
   return new Promise((resolve, reject) => {
     uni.request({
       url: config.baseUrl + url,
@@ -15,7 +15,7 @@ export default ({url, method='GET', data={}, header}) => {
       header: header ? {...serviceHeader, ...header} : serviceHeader,
       success(res) {
         uni.hideLoading();
-        console.log(`http ${method || 'GET'} --> ${config.baseUrl}${url} sign: ${res.data.sigin} data: `, res.data)
+        // console.log(`http ${method || 'GET'} --> ${config.baseUrl}${url} sign: ${res.data.sigin} data: `, res.data)
         setSign(res.data.sigin);
         if (res.data.code !== '1') {
           if (res.data.code === '-10000' || res.data.code === '-100000') {

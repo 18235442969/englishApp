@@ -1,0 +1,53 @@
+.chain{
+  .chain-info{
+    height: 100vh;
+    .chain-list{
+      padding: 0 10px;
+      .chain-item {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid #eeeff1;
+
+        .chain-item-left,
+        .chain-item-right {
+          flex-grow: 1;
+          padding: 10px 0;
+          width: 50%;
+
+          .chain-item-middle,
+          .chain-item-bottom {
+            display: flex;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-grow: 1;
+            height: 50%;
+          }
+
+          .chain-item-middle {
+            color: #a4a5a6;
+            font-size: 0.7rem;
+          }
+
+          .chain-item-bottom {
+            align-items: flex-end;
+            color: #4ba1e0;
+            font-size: 1rem;
+          }
+
+          .chain-item-start {
+            justify-content: flex-start;
+          }
+
+          .chain-item-end {
+            justify-content: flex-end;
+          }
+
+          .chain-item-time {
+            font-size: 0.65rem;
+            color: #f68650;
+          }
+        }
+      }
+    }
+  }
+}

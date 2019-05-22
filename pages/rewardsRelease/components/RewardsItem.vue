@@ -5,7 +5,7 @@
         奖励时间
       </view>
       <view class="rewards-item-bottom rewards-item-start rewards-item-time">
-        2019-4-11 16:57:23
+        {{item.createTime | timeFilter}}
       </view>
     </view>
     <view class="rewards-item-right">
@@ -13,7 +13,7 @@
         奖励金额
       </view>
       <view class="rewards-item-bottom rewards-item-end">
-        +500
+        {{item.plan}}
       </view>
     </view>
   </view>
@@ -21,11 +21,17 @@
 
 <script>
   export default {
+    props: ['item'],
     data() {
       return {
         
       }
-    }
+    },
+    filters: {
+      timeFilter(val) {
+        return val.replace(/T/g, ' ').replace(/-/g, '/');
+      }
+    },
   }
 </script>
 

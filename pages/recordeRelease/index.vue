@@ -1,10 +1,10 @@
 <template>
   <view class="recorde-release">
-    <view class="recorde-info">
+    <!-- <view class="recorde-info">
       <view class="status_bar"></view>
       <view class="recorde-nav">
-        <view class="recorde-nav-icon">
-          <icon-font className="iconback" fontClass="iconBack" @clickIcon="goBack" />
+        <view class="recorde-nav-icon" @click="goBack">
+          <icon-font className="iconback" fontClass="iconBack" />
           释放记录
         </view>
       </view>
@@ -19,40 +19,60 @@
           点券
         </view>
       </view>
-    </view>
-    <scroll-view class="recorde-list" :scroll-y="true">
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
-      <release-item></release-item>
+    </view> -->
+    <scroll-view class="recorde-list" :scroll-y="true" @scrolltolower="getMore">
+      <release-item v-for="(i, index) in releaseList" :key="index" :release="i"></release-item>
     </scroll-view>
 	</view>
 </template>
 
 <script>
   import ReleaseItem from './components/ReleaseItem.vue';
+  import userApi from '../../api/user';
   export default {
     components: {
       ReleaseItem
     },
     data() {
       return {
+        releaseList: [],
+        pageCount: 0,
+        dataCount: 0,
+        pageIndex: 1,
+        pageSize: 20,
+        loadMore: true
       }
     },
     methods: {
       goBack() {
-
+        uni.navigateBack();
+      },
+      getMore() {
+        if (this.pageIndex < this.pageCount && this.loadMore) {
+          this.pageIndex++;
+          this.loadMore = false;
+          this.getReleaseList();
+        }
+      },
+      async getReleaseList() {
+        try {
+          let res = await userApi.getReleaseList({
+            pageIndex: this.pageIndex,
+            pageSize: this.pageSize
+          });
+          this.loadMore = true;
+          if (res.success) {
+            this.pageCount = res.body.pageCount;
+            this.dataCount = res.body.dataCount;
+            this.releaseList = [...this.releaseList, ...res.body.paging];
+          }
+        } catch (error) {
+          this.loadMore = true;
+        }
       }
+    },
+    onLoad() {
+      this.getReleaseList();
     }
   }
 </script>

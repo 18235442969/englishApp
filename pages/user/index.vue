@@ -30,7 +30,7 @@
         <view class="user-info-item-center">
           {{balance}}
         </view>
-        <view class="user-info-item-bottom">
+        <view class="user-info-item-bottom" @click="onChain">
           <img src="../../asstes/images/user-money.png" class="user-money">
         </view>
       </view>
@@ -80,7 +80,7 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view>
+        </view> -->
         <view class="user-item-nav" @click="gotoPage('recordeRelease')">
           <view class="user-item-nav-icon">
             <icon-font className="iconqiandai" />
@@ -91,8 +91,8 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view> -->
-        <!-- <view class="user-item-nav" @click="gotoPage('rewardsRelease')">
+        </view>
+        <view class="user-item-nav" @click="gotoPage('rewardsRelease')">
           <view class="user-item-nav-icon">
             <icon-font className="iconjiangli2" />
           </view>
@@ -102,8 +102,8 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view> -->
-        <!-- <view class="user-item-nav" @click="gotoPage('notice')">
+        </view>
+        <view class="user-item-nav" @click="gotoPage('onChain')">
           <view class="user-item-nav-icon">
             <icon-font className="iconweibiaoti5" />
           </view>
@@ -113,7 +113,7 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view> -->
+        </view>
         <view class="user-item-nav" @click="gotoPage('notice')">
           <view class="user-item-nav-icon">
             <icon-font className="iconfuwu" />
@@ -160,14 +160,33 @@
         </view>
       </view>
     </view>
+    <view class="e-prompt" :class="isPromptShow ? 'e-prompt-in' : ''">
+      <view class="e-prompt-layer" @click="closePrompt"></view>
+        <view class="e-prompt-container">
+        <view class="e-prompt-title">
+          请输入上链数量(必须整数)
+        </view>
+        <view class="e-prompt-center">
+          <input type="number" placeholder="请输入数量" class="e-prompt-input" placeholder-class="e-prompt-input-placeholder" :maxlength="15" v-model="chainNum"/>
+        </view>
+        <view class="e-prompt-operation">
+          <button type="warn" class="e-prompt-button" @click="submitOnChain">确认</button>
+        </view>
+      </view>
+    </view>
 	</view>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
+  import valid from '../../utils/valid.js';
+  import userApi from '../../api/user';
+  const space = 'user';
   export default {
     data() {
       return {
+        isPromptShow: false,
+        chainNum: '',
         name: '',
         leave: 0,
         upMoney: 0,
@@ -186,10 +205,54 @@
       }
     },
     methods: {
+      ...mapActions(space, {
+        changeUserInfo: 'changeUserInfo'
+      }),
       gotoPage(url) {
         uni.navigateTo({
           url: `/pages/${url}/index`
         })
+      },
+      onChain() {
+        this.isPromptShow = true;
+      },
+      closePrompt() {
+        this.chainNum = '';
+        this.isPromptShow = false;
+      },
+      async submitOnChain() {
+        const res = /^[0-9]+$/;
+        if (!res.test(this.chainNum)) {
+          return uni.showToast({
+            mask: true,
+            icon: 'none',
+            title: '输入数量应为正整数'
+          })
+        }
+        try {
+          uni.showLoading({
+            mask: true
+          })
+          let res = await userApi.upAmount({
+            total: Number(this.chainNum)
+          })
+          if (res.success) {
+            let userInfo = this.userInfo || uni.getStorageSync('user-info') || {};
+            this.upMoney = res.body.amount;
+            this.balance = res.body.total;
+            userInfo.total = res.body.total;
+            userInfo.amount = res.body.amount;
+            this.changeUserInfo(userInfo);
+            uni.setStorageSync('user-info', userInfo);
+            this.closePrompt();
+            uni.showToast({
+              mask: true,
+              icon: 'none',
+              title: '上链成功'
+            })
+          }
+        } catch (error) {
+        }
       }
     },
     onShow() {
