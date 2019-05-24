@@ -3,8 +3,8 @@
     <view class="tradeRecord-top">
       <view class="status_bar"></view>
       <view class="tradeRecord-nav">
-        <view class="tradeRecord-nav-icon">
-          <icon-font className="iconback" fontClass="iconBack" @clickIcon="goBack" />
+        <view class="tradeRecord-nav-icon" @click="goBack">
+          <icon-font className="iconback" fontClass="iconBack" />
           我的账单
         </view>
         <view class="tradeRecord-nav-balance">

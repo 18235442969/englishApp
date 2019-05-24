@@ -35,11 +35,12 @@
         })) {
           return;
         }
-        if (this.password.trim().length !== 6) {
+        const res = /^[0-9]+$/;
+        if (this.password.trim().length !== 6 || !res.test(this.password)) {
           return uni.showToast({
             icon: 'none',
             mask: true,
-            title: '请输入6位交易密码'
+            title: '请输入6位数字交易密码'
           });
         }
         try {

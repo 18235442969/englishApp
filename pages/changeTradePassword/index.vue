@@ -96,11 +96,12 @@
         this.timer();
       },
       async submit() {
-        if (this.newPassword.length !== 6) {
+        const res = /^[0-9]+$/;
+        if (this.newPassword.length !== 6 || !res.test(this.newPassword)) {
           return uni.showToast({
             mask: true,
             icon: 'none',
-            title: '请输入6位密码'
+            title: '请输入6位数字密码'
           });
         }
         if (this.newPassword !== this.repeatPassword) {

@@ -1,7 +1,7 @@
 <template>
   <view class="chain">
     <scroll-view class="chain-info" :scroll-y="true" @scrolltolower="getMore">
-      <view class="chain-list">
+      <view class="chain-list" v-if="chainList.length > 0">
         <view class="chain-item" v-for="(i, index) in chainList" :key="index">
           <view class="chain-item-left">
             <view class="chain-item-middle chain-item-start">
@@ -20,6 +20,11 @@
             </view>
           </view>
         </view>
+      </view>
+      <view class="no-data" v-else>
+        <text class="no-data-text">
+          暂无数据
+        </text>
       </view>
     </scroll-view>
   </view>

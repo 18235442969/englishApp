@@ -13,10 +13,20 @@
     </view>
     <view class="rewards-line"></view>
     <scroll-view :scroll-y="true" class="rewards-list" v-show="tabIndex === 0" @scrolltolower="getRecommendMore">
-      <rewards-item v-for="(i , index) in recommendList" :key="index" :item="i"></rewards-item>
+      <rewards-item v-for="(i , index) in recommendList" :key="index" :item="i" ></rewards-item>
+      <view class="no-data" v-if="tabIndex === 0 && recommendList.length === 0">
+        <text class="no-data-text">
+          暂无数据
+        </text>
+      </view>
     </scroll-view>
     <scroll-view :scroll-y="true" class="rewards-list" v-show="tabIndex === 1" @scrolltolower="getRechargeMore">
       <rewards-item v-for="(i , index) in rechargeList" :key="index" :item="i"></rewards-item>
+      <view class="no-data" v-if="tabIndex === 1 && rechargeList.length === 0">
+        <text class="no-data-text">
+          暂无数据
+        </text>
+      </view>
     </scroll-view>
     <!-- <scroll-view :scroll-y="true" class="rewards-list" v-if="tabIndex === 2">
       <rewards-item></rewards-item>2

@@ -8,6 +8,11 @@
         </view>
       </view>
     </view>
+    <view class="no-data" v-if="noticeList.length === 0">
+      <text class="no-data-text">
+        暂无数据
+      </text>
+    </view>
 	</scroll-view>
 </template>
 

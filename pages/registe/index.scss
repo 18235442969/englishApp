@@ -7,6 +7,13 @@
     background-size: 100vw 100vh;
     background-repeat: none;
 
+    .icon-back{
+      display: inline-block;
+      position: absolute;
+      top: calc(var(--status-bar-height) + 0.5rem);
+      left: 0.8rem;
+    }
+
     .logo {
       display: block;
       margin: 0 auto;

@@ -2,7 +2,9 @@
   <view class="registe">
     <view class="registe-bg">
       <view class="status_bar"></view>
-      <icon-font className="iconback" fontClass="iconBack" :clickIcon="goBack" />
+      <view class="icon-back" @click="goBack">
+        <icon-font className="iconback" fontClass="iconBack" />
+      </view>
 		  <img src="../../asstes/images/logo.png" class="logo"/>
 
       <view class="phone">
@@ -208,11 +210,12 @@
             title: '登录密码需要同时包含字母和数字'
           });
         }
-        if (this.tradePassword.trim().length !== 6) {
+        const res = /^[0-9]+$/;
+        if (this.tradePassword.length !== 6 || !res.test(this.tradePassword)) {
           return uni.showToast({
             icon: 'none',
             mask: true,
-            title: '请输入6位交易密码'
+            title: '请输入6位数字交易密码'
           });
         }
         uni.showLoading({
@@ -250,9 +253,6 @@
 		font-size: 1rem !important;
 	}
   .iconBack{
-    position: absolute;
-    top: calc(var(--status-bar-height) + 5px);
-    left: 10px;
 		color: #fff;
 		font-size: 1rem !important;
   }

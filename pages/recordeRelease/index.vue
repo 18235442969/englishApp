@@ -22,6 +22,11 @@
     </view> -->
     <scroll-view class="recorde-list" :scroll-y="true" @scrolltolower="getMore">
       <release-item v-for="(i, index) in releaseList" :key="index" :release="i"></release-item>
+      <view class="no-data" v-if="releaseList.length === 0">
+        <text class="no-data-text">
+          暂无数据
+        </text>
+      </view>
     </scroll-view>
 	</view>
 </template>

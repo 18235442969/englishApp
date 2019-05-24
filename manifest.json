@@ -2,8 +2,8 @@
     "name" : "英语链",
     "appid" : "__UNI__0FBF706",
     "description" : "",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.1.1",
+    "versionCode" : 111,
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
@@ -85,19 +85,19 @@
             "splashscreen" : {
                 "ios" : {
                     "iphone" : {
-                        "retina35" : "/Users/monkey/Desktop/英语启动页/640X960.png",
-                        "retina40" : "/Users/monkey/Desktop/英语启动页/640X1136.png",
-                        "retina47" : "/Users/monkey/Desktop/英语启动页/750X1334.png",
-                        "retina55" : "/Users/monkey/Desktop/英语启动页/1242X2208.png",
-                        "iphonex" : "/Users/monkey/Desktop/英语启动页/1125X2436.png",
-                        "portrait-896h@2x" : "/Users/monkey/Desktop/英语启动页/828 × 1792.png",
-                        "portrait-896h@3x" : "/Users/monkey/Desktop/英语启动页/1242 × 2688.png"
+                        "retina35" : "/Users/monkey/Desktop/启动页 2/640X960.png",
+                        "retina40" : "/Users/monkey/Desktop/启动页 2/640X1136.png",
+                        "retina47" : "/Users/monkey/Desktop/启动页 2/750X1334.png",
+                        "retina55" : "/Users/monkey/Desktop/启动页 2/1242X2208.png",
+                        "iphonex" : "/Users/monkey/Desktop/启动页 2/1125X2436.png",
+                        "portrait-896h@2x" : "/Users/monkey/Desktop/启动页 2/828X1792.png",
+                        "portrait-896h@3x" : "/Users/monkey/Desktop/启动页 2/1242X2688.png"
                     }
                 },
                 "android" : {
-                    "hdpi" : "/Users/monkey/Desktop/英语启动页/480X762.png",
-                    "xhdpi" : "/Users/monkey/Desktop/英语启动页/720X1242.png",
-                    "xxhdpi" : "/Users/monkey/Desktop/英语启动页/1080X1882.png"
+                    "hdpi" : "/Users/monkey/Desktop/启动页 2/480X762.png",
+                    "xhdpi" : "/Users/monkey/Desktop/启动页 2/720X1242.png",
+                    "xxhdpi" : "/Users/monkey/Desktop/启动页 2/1080X1882.png"
                 }
             }
         }

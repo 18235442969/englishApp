@@ -2,7 +2,9 @@
 	<view class="study page-bg-img">
 		<view class="status_bar"></view>
 		<view class="icon-left">
-      <icon-font className="iconshu" fontClass="book-class" :clickIcon="gotoBookPage"></icon-font>
+			<view class="icon-left-view" @click="gotoBookPage">
+      	<icon-font className="iconshu" fontClass="book-class" ></icon-font>
+			</view>
     </view>
 		<view class="study-info">
 			<view class="study-info-day">
@@ -66,33 +68,33 @@
 			gotoBookPage() {
 				this.$go('book');
 			},
-			timeOut() {
-				let time = uni.getStorageSync('word-list-time') || '';
-				let wordList = uni.getStorageSync('word-list');
-				let wordNum = uni.getStorageSync('word-num') || 0;
-				if (!time || (!wordList || wordList.length === 0 || wordList.length < wordNum)) {
-					return true;
-				} else {
-					let date = new Date(new Date().toLocaleDateString()).getTime();
-					return date === time ? false : true;
-				}
-			},
+			// timeOut() {
+			// 		let date = new Date(new Date().toLocaleDateString()).getTime();
+			// 	let time = uni.getStorageSync('word-list-time') || '';
+			// 	let wordList = uni.getStorageSync('word-list');
+			// 	let wordNum = uni.getStorageSync('word-num') || 0;
+			// 	if (!time || (!wordList || wordList.length === 0)) {
+			// 		return true;
+			// 	} else {
+			// 		return date === time ? false : true;
+			// 	}
+			// },
 			startStudy() {
-				let wordList = uni.getStorageSync('word-list') || [];
-				if (this.timeOut()) {
-					this.getWordList();
-				} else {
-					let learnWordList = wordList.filter(e => !e.know);
-					if (learnWordList.length === 0) {
-						uni.showModal({
-							title: '英语链',
-							content: '您今天已学习完毕',
-							showCancel: false
-						})
-					} else {
-						this.$go('wordList');
-					}
-				}
+				// let wordList = uni.getStorageSync('word-list') || [];
+				// if (this.timeOut()) {
+				this.getWordList();
+				// } else {
+				// 	let learnWordList = wordList.filter(e => !e.know);
+				// 	if (learnWordList.length === 0) {
+				// 		uni.showModal({
+				// 			title: '英语链',
+				// 			content: '您今天已学习完毕',
+				// 			showCancel: false
+				// 		})
+				// 	} else {
+				// 		this.$go('wordList');
+				// 	}
+				// }
 			},
 			async getWordList() {
 				try {
@@ -101,18 +103,35 @@
 						id: user.typeId
 					})
 					if (res.success) {
-						let date = new Date(new Date().toLocaleDateString()).getTime();
-						uni.setStorageSync('word-list-time', date);
-						uni.setStorageSync('word-list', res.body.list);
-						uni.setStorageSync('word-num', res.body.listNum[0].count);
-						if (res.body.list.length === 0) {
-							uni.showModal({
-								title: '英语链',
-								content: '当前词库已学习完毕，请切换词库',
-								showCancel: false
-							})
-						} else {
-							this.$go('wordList');
+						// let date = new Date(new Date().toLocaleDateString()).getTime();
+						// uni.setStorageSync('word-list-time', date);
+						// uni.setStorageSync('word-num', res.body.listNum[0].count);
+						switch (res.body.code) {
+							case '-10':
+								uni.showModal({
+									title: '英语链',
+									content: '当前词库已学习完毕，请切换词库',
+									showCancel: false
+								});
+								break;
+							case '-5':
+								uni.showModal({
+									title: '英语链',
+									content: '您今天已学习完毕',
+									showCancel: false
+								});
+								break;
+							case '1':
+								uni.setStorageSync('word-list', res.body.list);
+								this.$go('wordList');
+								break;
+							default:
+								uni.showModal({
+									title: '英语链',
+									content: '您今天已学习完毕',
+									showCancel: false
+								});
+								break;
 						}
 					}
 				} catch (error) {

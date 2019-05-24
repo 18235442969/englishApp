@@ -10,7 +10,7 @@
 					<icon-font className="iconshouji" fontClass="login-icon" />
 				</view>
 				<view class="input-input">
-					<input type="number" class="login-input" placeholder-class="login-placeholder" v-model="phone" placeholder="请输入手机号" :maxlength="11"/>
+					<input type="number" class="login-input" placeholder-class="login-placeholder" v-model="phone" placeholder="请输入手机号或ID" :maxlength="11"/>
 				</view>
 			</view>
 		</view>
@@ -76,13 +76,13 @@
 				})) {
 					return;
 				}
-				if (!valid.isPhone(this.phone)) {
-          return uni.showToast({
-            icon: 'none',
-            mask: true,
-            title: '手机号格式不正确'
-          });
-        }
+				// if (!valid.isPhone(this.phone)) {
+        //   return uni.showToast({
+        //     icon: 'none',
+        //     mask: true,
+        //     title: '手机号格式不正确'
+        //   });
+        // }
         if (!valid.passwordValid(this.password)) {
           return uni.showToast({
             icon: 'none',
