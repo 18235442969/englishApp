@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import uCharts from '../../compoments/Line/components/u-charts/u-charts.js';
+  // import uCharts from '../../compoments/Line/components/u-charts/u-charts.js';
   import marketApi from '../../api/market';
   let _self = null;
 	let canvaLine = null;
@@ -70,49 +70,49 @@
           url: `/pages/putUpOrder/index?id=${id}`
         });
       },
-      getData(canvasId, chartData) {
-        canvaLine = new uCharts({
-					$this: _self,
-					canvasId: canvasId,
-					type: 'line',
-					legend: true,
-					fontSize: 13,
-					background:'#f0942d',
-					pixelRatio: _self.pixelRatio,
-					animation: true,
-					categories: chartData.categories,
-					series: chartData.series,
-					xAxis: {
-						disableGrid: true,
-					},
-					yAxis: {
-					},
-					dataLabel: true,
-					width: _self.cWidth * _self.pixelRatio,
-					height: _self.cHeight * _self.pixelRatio,
-				});
-      },
-      initChartData() {
-        _self = this;
-        uni.getSystemInfo({
-          success: res => {
-            this.cWidth = uni.upx2px(res.windowWidth * res.pixelRatio);
-          }
-        })
-        this.cHeight = uni.upx2px(500);
-        let chartData = {};
-        chartData.categories = ["2012",
-          "2013",
-          "2014",
-          "2015",
-          "2016",
-          "2017"];
-        chartData.series = [{
-          "name": "周线",
-          "data": [35, 20, 25, 37, 4, 20]
-          }];
-        this.getData('canvasLine', chartData);
-      },
+      // getData(canvasId, chartData) {
+      //   canvaLine = new uCharts({
+			// 		$this: _self,
+			// 		canvasId: canvasId,
+			// 		type: 'line',
+			// 		legend: true,
+			// 		fontSize: 13,
+			// 		background:'#f0942d',
+			// 		pixelRatio: _self.pixelRatio,
+			// 		animation: true,
+			// 		categories: chartData.categories,
+			// 		series: chartData.series,
+			// 		xAxis: {
+			// 			disableGrid: true,
+			// 		},
+			// 		yAxis: {
+			// 		},
+			// 		dataLabel: true,
+			// 		width: _self.cWidth * _self.pixelRatio,
+			// 		height: _self.cHeight * _self.pixelRatio,
+			// 	});
+      // },
+      // initChartData() {
+      //   _self = this;
+      //   uni.getSystemInfo({
+      //     success: res => {
+      //       this.cWidth = uni.upx2px(res.windowWidth * res.pixelRatio);
+      //     }
+      //   })
+      //   this.cHeight = uni.upx2px(500);
+      //   let chartData = {};
+      //   chartData.categories = ["2012",
+      //     "2013",
+      //     "2014",
+      //     "2015",
+      //     "2016",
+      //     "2017"];
+      //   chartData.series = [{
+      //     "name": "周线",
+      //     "data": [35, 20, 25, 37, 4, 20]
+      //     }];
+      //   this.getData('canvasLine', chartData);
+      // },
       async getTransferConfig() {
         try {
           let res = await marketApi.getTransferConfig();

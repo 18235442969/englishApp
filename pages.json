@@ -214,24 +214,18 @@
 			"selectedColor": "#ec5b00",
 			"backgroundColor": "#ffffff",
 			"list": [
-			// 	{
-			// 		"pagePath": "pages/trade/index",
-			// 		"iconPath": "static/images/trade.png",
-			// 		"selectedIconPath": "static/images/tradeSelect.png",
-			// 		"text": "交易"
-			// },
 			{
 					"pagePath": "pages/study/index",
 					"iconPath": "static/images/study.png",
 					"selectedIconPath": "static/images/studySelect.png",
 					"text": "学习"
 			}
-			// ,{
-			// 		"pagePath": "pages/trade/index",
-			// 		"iconPath": "static/images/trade.png",
-			// 		"selectedIconPath": "static/images/tradeSelect.png",
-			// 		"text": "交易"
-			// }
+			,{
+					"pagePath": "pages/trade/index",
+					"iconPath": "static/images/trade.png",
+					"selectedIconPath": "static/images/tradeSelect.png",
+					"text": "交易"
+			}
 			,{
 					"pagePath": "pages/user/index",
 					"iconPath": "static/images/user.png",

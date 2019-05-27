@@ -14,7 +14,7 @@
             链上资产
           </view>
           <view class="order-money-item-num">
-            100000
+            {{balance}}
           </view>
         </view>
         <view class="order-money-item right-line">
@@ -22,7 +22,7 @@
             当前价格
           </view>
           <view class="order-money-item-num">
-            ￥1.28
+            ￥{{price}}
           </view>
         </view>
         <view class="order-money-item right-line">
@@ -30,7 +30,7 @@
             冻结点券
           </view>
           <view class="order-money-item-num">
-            20
+            {{freeze}}
           </view>
         </view>
       </view>
@@ -83,48 +83,60 @@
               <button class="order-list-item-btn" @click="sale(i.id)">出售</button>
             </view>
           </view>
+          <view class="no-data" v-if="tradeList.length === 0">
+            <text class="no-data-text">
+              暂无数据
+            </text>
+          </view>
         </scroll-view>
       </swiper-item>
       <swiper-item class="order-content-item">
         <scroll-view class="order-content-item-scroll" :scroll-y="true">
-          <view class="order-mail-item">
+          <view class="order-mail-item" v-for="i in mailList" :key="i.id">
             <view class="order-mail-item-top">
               <view class="order-mail-item-top-id">
-                单号:1904161043
+                单号:{{i.code}}
               </view>
               <view class="order-mail-item-top-time">
-                2019-4-16 10:44
+                {{i.createTime | timeFilter}}
               </view>
             </view>
             <view class="order-mail-item-content">
               <view class="order-mail-item-content-left">
-                200点券
+                {{i.amount}}点券
               </view>
               <view class="order-mail-item-content-content">
-                ￥10000.23
+                ￥{{i.total}}
               </view>
               <view class="order-mail-item-content-right">
-                <!-- <text>待匹配</text> -->
-                <!-- <text class="perform">待打款</text> -->
-                <!-- <text class="perform">买家待确认</text> -->
-                <text class="perform">卖家待确认</text>
-                <!-- <text class="complaint">异常中</text> -->
+                <text v-if="i.step === 1">待匹配</text>
+                <text class="perform" v-if="i.step === 2">待打款</text>
+                <text class="perform" v-if="i.step === 3">买家待确认</text>
+                <text class="perform" v-if="i.step === 4">卖家待确认</text>
+                <text class="complaint" v-if="i.step === -1 || i.step === -2">异常中</text>
+                <text v-if="i.step === 5">已完成</text>
+                <text v-if="i.step === -3">已完成</text>
               </view>
             </view>
             <view class="order-mail-item-bottom">
               <view class="order-mail-item-bottom-info">
-                <button :plain="true" class="order-mail-item-bottom-btn" size="mini" @click="showInfo(true)">联系信息</button>
+                <button :plain="true" class="order-mail-item-bottom-btn" size="mini" @click="showInfo(true, i)" v-if="i.step !== 1">联系信息</button>
               </view>
               <view class="order-mail-item-bottom-option">
-                <!-- <button :plain="true" class="order-mail-item-bottom-btn" size="mini">取消</button> -->
-                <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="showInfo(false)">卖家信息</button>
-                <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="uploadImg">上传凭证</button>
-                <!-- <button :plain="true" class="order-mail-item-bottom-btn" size="mini">举报</button> -->
-                <button :plain="true" class="order-mail-item-bottom-btn btn-red" size="mini">确认打款</button>
-                <!-- <button :plain="true" class="order-mail-item-bottom-btn" size="mini">确认交易</button> -->
-                <!-- <button :plain="true" class="order-mail-item-bottom-btn" size="mini">申诉</button> -->
+                <button :plain="true" class="order-mail-item-bottom-btn" size="mini" v-if="i.step === 1 && i.isCance === '1'" @click="changeMail(-3, i)">取消</button>
+                <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="showInfo(false, i)" v-if="i.step === 2 && i.state === -1">卖家信息</button>
+                <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="uploadImg(i)" v-if="(i.step === 2 || i.step === 3) && i.state === -1">上传凭证</button>
+                <button :plain="true" class="order-mail-item-bottom-btn btn-red btn-mr" size="mini" v-if="i.step === 3 && i.state === -1" @click="changeMail(4, i)">确认打款</button>
+                <button :plain="true" class="order-mail-item-bottom-btn" size="mini" v-if="(i.step === 2 || i.step === 3) && i.state === -1" @click="changeMail(-1, i)">举报</button>
+                <button :plain="true" class="order-mail-item-bottom-btn btn-red btn-mr" size="mini" v-if="i.step === 4 && i.state === 1" @click="changeMail(5, i)">确认交易</button>
+                <button :plain="true" class="order-mail-item-bottom-btn" size="mini" v-if="i.step === 4 && i.state === 1" @click="changeMail(-2, i)">申诉</button>
               </view>
             </view>
+          </view>
+          <view class="no-data" v-if="mailList.length === 0">
+            <text class="no-data-text">
+              暂无数据
+            </text>
           </view>
         </scroll-view>
       </swiper-item>
@@ -151,60 +163,60 @@
         </view>
         <view class="e-prompt-center">
           <view class="prompt-user-info">
-            <view class="prompt-user-info-item" v-if="infoAllType">
+            <view class="prompt-user-info-item" v-if="infoAllType && userInfo.name">
               <view class="prompt-user-info-item-left">
-                姓名：宋为民
+                姓名：{{userInfo.name}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.name)">复制</button>
               </view>
             </view>
-            <view class="prompt-user-info-item" v-if="infoAllType">
+            <view class="prompt-user-info-item" v-if="infoAllType && userInfo.generateId">
               <view class="prompt-user-info-item-left">
-                ID：123456
+                ID：{{userInfo.generateId}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.generateId)">复制</button>
               </view>
             </view>
-            <view class="prompt-user-info-item" v-if="infoAllType">
+            <view class="prompt-user-info-item" v-if="infoAllType && userInfo.phone">
               <view class="prompt-user-info-item-left">
-                手机号：18322336565
+                手机号：{{userInfo.phone}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.phone)">复制</button>
               </view>
             </view>
-            <view class="prompt-user-info-item" v-if="!infoAllType">
+            <view class="prompt-user-info-item" v-if="!infoAllType && userInfo.ebankname">
               <view class="prompt-user-info-item-left">
-                开户行：中国光大银行中国光大银行中国光大银行中国光大银行
+                开户行：{{userInfo.ebankname}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.ebankname)">复制</button>
               </view>
             </view>
-            <view class="prompt-user-info-item" v-if="!infoAllType">
+            <view class="prompt-user-info-item" v-if="!infoAllType && userInfo.cardno">
               <view class="prompt-user-info-item-left">
-                银行卡：6227336555621256326
+                银行卡：{{userInfo.cardno}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.cardno)">复制</button>
               </view>
             </view>
-            <view class="prompt-user-info-item" v-if="!infoAllType">
+            <view class="prompt-user-info-item" v-if="!infoAllType && userInfo.alipay">
               <view class="prompt-user-info-item-left">
-                支付宝：12364554454
+                支付宝：{{userInfo.alipay}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.alipay)">复制</button>
               </view>
             </view>
-            <view class="prompt-user-info-item" v-if="!infoAllType">
+            <view class="prompt-user-info-item" v-if="!infoAllType && userInfo.weixin">
               <view class="prompt-user-info-item-left">
-                微信：asdasasd
+                微信：{{userInfo.weixin}}
               </view>
               <view class="prompt-user-info-item-right">
-                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo">复制</button>
+                <button :plain="true" class="prompt-user-info-item-btn btn-red" size="mini" @click="copyInfo(userInfo.weixin)">复制</button>
               </view>
             </view>
           </view>
@@ -245,8 +257,13 @@
         pageIndex: 1,
         pageCount: 0,
         tradeList: [],
+        mailList: [],
         loadMore: true,
-        orderId: ''
+        orderId: '',
+        userInfo: {},
+        balance: 0,
+        price: 0,
+        freeze: 0
       }
     },
     computed: {
@@ -310,22 +327,35 @@
             tradePassword: this.tradePassword
           });
           if (res.success) {
-            this.orderId = '';
-            this.tradePassword = '';
             uni.showToast({
               title: '出售成功'
             });
+            this.pageIndex = 1;
+            this.getTradeList();
+            this.getMailList();
+            this.closePrompt();
+            this.orderId = '';
+            this.tradePassword = '';
           }
         } catch (error) {
         }
       },
-      showInfo(type) {
+      showInfo(type, user) {
         this.infoAllType = type;
         this.isInfoPromptShow = true;
+        this.userInfo.name = user.name;
+        this.userInfo.generateId = user.generateId;
+        this.userInfo.phone = user.phone;
+
+        this.userInfo.ebankname = user.ebankname;
+        this.userInfo.cardno = user.cardno;
+        this.userInfo.alipay = user.alipay;
+        this.userInfo.weixin = user.weixin;
+
       },
-      copyInfo() {
+      copyInfo(text) {
         uni.setClipboardData({
-          data: 'asd',
+          data: text,
           success() {
             uni.showToast({
               title: '复制成功'
@@ -343,6 +373,7 @@
             this.numberIndex = 0;
             this.number = this.numberList[0];
             this.checkbok.isOK = false;
+            this.getMailList();
             uni.showToast({
               title: '提交成功'
             });
@@ -359,10 +390,25 @@
           this.loadMore = true;
           if (res.success) {
             this.pageCount = res.body.pageCount;
-            this.tradeList = [...this.tradeList, ...res.body.paging];
+            if (this.pageIndex === 1) {
+              this.tradeList = res.body.paging || [];
+            } else {
+              this.tradeList = [...this.tradeList, ...res.body.paging];
+            }
           }
         } catch (error) {
           this.loadMore = true;
+        }
+      },
+      async getMailList() {
+        try {
+          let res = await marketApi.transferrecord({
+            type: this.typeId
+          });
+          if (res.success) {
+            this.mailList = res.body || [];
+          }
+        } catch (error) {
         }
       },
       getMore() {
@@ -372,7 +418,39 @@
           this.getTradeList();
         }
       },
-      async uploadImg() {
+      changeMail(type, mail) {
+        uni.showModal({
+          title: '提示',
+          content: '您确定要执行此操作吗?',
+          success: (res) => {
+            if (res.confirm) {
+              this.submitMail(type, mail);
+            }
+          }
+        });
+      },
+      async submitMail(type, mail){
+        try {
+          uni.showLoading({
+            mask: true
+          });
+          let res = await marketApi.hangTransferByStep({
+            id: mail.id,
+            step: type
+          });
+          if (res.success) {
+            uni.showToast({
+              title: res.msg
+            });
+            if (res.body.step == 5) {
+              this.getMailList();
+            }
+            mail.step = res.body.step;
+          }
+        } catch (error) {
+        }
+      },
+      async uploadImg(mail) {
         uni.chooseImage({
           count: 1, //默认9
           sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
@@ -380,7 +458,7 @@
           success: async (res) => {
             const tempFilePaths = res.tempFilePaths[0];
             uploadFile(tempFilePaths, '', (data) => {
-              console.log(data)
+              this.upImgForTransfer(data, mail);
             }, (error) => {
               uni.showToast({
                 icon: 'none',
@@ -389,6 +467,40 @@
             });
           }
         });
+      },
+      async upImgForTransfer(url, mail) {
+        try {
+          uni.showLoading({
+            mask: true
+          });
+          let res = await marketApi.upImgForTransfer({
+            imgUrl: url,
+            id: mail.id
+          });
+          if (res.success) {
+            uni.showToast({
+              title: '上传成功'
+            })
+            mail.step = res.body.step;
+          }
+        } catch (error) {
+        }
+      },
+      async getMyAmountPrice() {
+        try {
+          let res = await marketApi.getMyAmountPrice();
+          if (res.success) {
+            this.balance = res.body.amount;
+            this.price = res.body.price;
+            this.freeze = res.body.frozen;
+          }
+        } catch (error) {
+        }
+      }
+    },
+    filters: {
+      timeFilter(val) {
+        return val.replace(/T/g, ' ').replace(/-/g, '/');
       }
     },
     onLoad(option) {
@@ -404,6 +516,8 @@
       }
       this.number = this.numberList[0];
       this.getTradeList();
+      this.getMailList();
+      this.getMyAmountPrice();
     }
   }
 </script>
