@@ -9,6 +9,8 @@ const url = {
   upImgForTransfer: 'Market/UpImgForTransfer',
   hangTransferByStep: 'Market/HangTransferByStep',
   getMyAmountPrice: 'Market/GetMyAmountPrice',
+  getMyTranList: 'Market/GetMyTranList',
+  getMyTranDB: 'Market/GetMyTranDB',
 }
 
 const getTransferConfig = () => {
@@ -90,6 +92,25 @@ const getMyAmountPrice = () => {
   return service(params);
 }
 
+const getMyTranList = ({pageIndex, pageSize, type}) => {
+  let params = {
+    url: url.getMyTranList,
+    data: {
+      requestPage: pageIndex,
+      pagesize: pageSize,
+      Type: type
+    }
+  }
+  return service(params);
+}
+
+const getMyTranDB = () => {
+  let params = {
+    url: url.getMyTranDB,
+  }
+  return service(params);
+}
+
 export default{
   getTransferConfig,
   newHandTransfer,
@@ -98,5 +119,7 @@ export default{
   upImgForTransfer,
   hangTransferByStep,
   transferrecord,
-  getMyAmountPrice
+  getMyAmountPrice,
+  getMyTranList,
+  getMyTranDB
 }

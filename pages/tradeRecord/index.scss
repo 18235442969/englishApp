@@ -103,3 +103,33 @@
     }
   }
 }
+
+.no-data{
+  display: flex;
+  font-size: 0.75rem;
+  width: 65%;
+  margin: 0 auto;
+  padding-top: 3rem;
+  line-height: 1.6rem;
+  text-align: center;
+  .no-data-text{
+    position: relative;
+    top: -0.9rem;
+    padding: 0 0.55rem;
+    color: #999999;
+  }
+}
+.no-data:before{
+  position: relative;
+  top: -1px;
+  flex: 1;
+  content: '';
+  border-top: 1px solid #E5E5E5;
+}
+.no-data:after{
+  position: relative;
+  top: -1px;
+  flex: 1;
+  content: '';
+  border-top: 1px solid #E5E5E5;
+}

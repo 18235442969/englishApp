@@ -8,10 +8,15 @@
           {{title}}
         </view>
       </view>
+      <view class="order-freeze" :class="freeze !== 0 ? 'order-freeze-bg' : ''">
+        <text v-if="freeze !== 0">
+          冻结点券：{{freeze}}
+        </text>
+      </view>
       <view class="order-money">
         <view class="order-money-item">
           <view class="order-money-item-text">
-            链上资产
+            钱包余额
           </view>
           <view class="order-money-item-num">
             {{balance}}
@@ -27,10 +32,10 @@
         </view>
         <view class="order-money-item right-line">
           <view class="order-money-item-text">
-            冻结点券
+            可售额度
           </view>
           <view class="order-money-item-num">
-            {{freeze}}
+            {{csTotal}}
           </view>
         </view>
       </view>
@@ -124,7 +129,7 @@
               </view>
               <view class="order-mail-item-bottom-option">
                 <button :plain="true" class="order-mail-item-bottom-btn" size="mini" v-if="i.step === 1 && i.isCance === '1'" @click="changeMail(-3, i)">取消</button>
-                <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="showInfo(false, i)" v-if="i.step === 2 && i.state === -1">卖家信息</button>
+                <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="showInfo(false, i)" v-if="i.step === 2 && i.state === -1">打款信息</button>
                 <button :plain="true" class="order-mail-item-bottom-btn btn-mr" size="mini" @click="uploadImg(i)" v-if="(i.step === 2 || i.step === 3) && i.state === -1">上传凭证</button>
                 <button :plain="true" class="order-mail-item-bottom-btn btn-red btn-mr" size="mini" v-if="i.step === 3 && i.state === -1" @click="changeMail(4, i)">确认打款</button>
                 <button :plain="true" class="order-mail-item-bottom-btn" size="mini" v-if="(i.step === 2 || i.step === 3) && i.state === -1" @click="changeMail(-1, i)">举报</button>
@@ -250,7 +255,7 @@
           isOK: false,
           name: 'check'
         },
-        tabIndex: 2,
+        tabIndex: 0,
         numberList: [],
         numberIndex: 0,
         number: '',
@@ -263,7 +268,8 @@
         userInfo: {},
         balance: 0,
         price: 0,
-        freeze: 0
+        freeze: 0,
+        csTotal: 0
       }
     },
     computed: {
@@ -493,6 +499,7 @@
             this.balance = res.body.amount;
             this.price = res.body.price;
             this.freeze = res.body.frozen;
+            this.csTotal = res.body.csTotal;
           }
         } catch (error) {
         }

@@ -7,7 +7,7 @@
           {{tradeInfo.price}}
         </view>
         <view class="trade-info-top-right">
-          成交量：<text class="trade-info-top-right-num">{{tradeInfo.amount}}</text>
+          <!-- 成交量：<text class="trade-info-top-right-num">{{tradeInfo.amount}}</text> -->
         </view>
       </view>
       <view class="trade-info-bottom">
@@ -15,7 +15,7 @@
           {{tradeInfo.num}}
         </view>
         <view class="trade-info-bottom-right">
-          成交总额：<text class="trade-info-bottom-right-num">{{tradeInfo.sumprice}}</text>
+          <!-- 成交总额：<text class="trade-info-bottom-right-num">{{tradeInfo.sumprice}}</text> -->
         </view>
       </view>
     </view>

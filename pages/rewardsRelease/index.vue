@@ -46,12 +46,10 @@
         tabIndex: 0,
         recommendList: [],
         recommendPageCount: 0,
-        recommendDataCount: 0,
         recommendPageIndex: 1,
         recommendPageSize: 20,
         rechargeList: [],
         rechargePageCount: 0,
-        rechargeDataCount: 0,
         rechargePageIndex: 1,
         rechargePageSize: 20,
         loadMore: true
@@ -71,7 +69,7 @@
         }
       },
       getRechargeMore() {
-        if (this.rechargePageIndex < this.rechargeDataCount && this.loadMore) {
+        if (this.rechargePageIndex < this.rechargePageCount && this.loadMore) {
           this.rechargePageIndex++;
           this.loadMore = false;
           this.getRechargeList();
@@ -86,7 +84,6 @@
           this.loadMore = true;
           if (res.success) {
             this.recommendPageCount = res.body.pageCount;
-            this.recommendDataCount = res.body.dataCount;
             this.recommendList = [...this.recommendList, ...res.body.paging];
           }
         } catch (error) {
@@ -102,7 +99,6 @@
           this.loadMore = true;
           if (res.success) {
             this.rechargePageCount = res.body.pageCount;
-            this.rechargeDataCount = res.body.dataCount;
             this.rechargeList = [...this.rechargeList, ...res.body.paging];
           }
         } catch (error) {

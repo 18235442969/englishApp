@@ -70,7 +70,7 @@
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
         </view>
-        <!-- <view class="user-item-nav" @click="gotoPage('tradeRecord')">
+        <view class="user-item-nav" @click="gotoPage('tradeRecord')">
           <view class="user-item-nav-icon">
             <icon-font className="icondingdan" />
           </view>
@@ -80,7 +80,7 @@
           <view class="user-item-nav-right">
             <icon-font className="iconyoujiantou" fontClass="right-icon"/>
           </view>
-        </view> -->
+        </view>
         <view class="user-item-nav" @click="gotoPage('recordeRelease')">
           <view class="user-item-nav-icon">
             <icon-font className="iconqiandai" />

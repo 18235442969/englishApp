@@ -2,13 +2,13 @@
   <view class="trade-item">
     <view class="trade-item-left">
       <view class="trade-item-top trade-item-start">
-        2019-4-11 16:57:23
+        {{trade.createTime | timeFilter}}
       </view>
       <view class="trade-item-middle trade-item-start">
         成交价格
       </view>
       <view class="trade-item-bottom trade-item-start">
-        11.26
+        {{trade.price}}
       </view>
     </view>
     <view class="trade-item-center">
@@ -18,7 +18,7 @@
         成交数量
       </view>
       <view class="trade-item-bottom">
-        2000
+        {{trade.amount}}
       </view>
     </view>
     <view class="trade-item-fill"></view>
@@ -30,7 +30,7 @@
         成交额度
       </view>
       <view class="trade-item-bottom trade-item-start">
-        225200
+        {{trade.total}}
       </view>
     </view>
   </view>
@@ -38,6 +38,12 @@
 
 <script>
   export default {
+    props: ['trade'],
+    filters: {
+      timeFilter(val) {
+        return val.replace(/T/g, ' ').replace(/-/g, '/');
+      }
+    },
     data() {
       return {
         

@@ -13,10 +13,22 @@
         color: #fff;
       }
     }
+    .order-freeze{
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 2vh;
+      padding: 0.5vh 0;
+      padding-right: 4vw;
+      font-size: 0.75rem;
+      color: #feff4e;
+    }
+    .order-freeze-bg{
+      background-color: #ffb259;
+    }
     .order-money{
       display: flex;
       flex-direction: row;
-      margin-top: 5vh;
+      margin-top: 2vh;
       .order-money-item{
         display: flex;
         flex-grow: 1;
@@ -44,7 +56,7 @@
       display: flex;
       flex-direction: row;
       padding: 0 3vw;
-      margin-top: 5vh;
+      margin-top: 2vh;
       .order-tab-item{
         flex-grow: 1;
         display: flex;
