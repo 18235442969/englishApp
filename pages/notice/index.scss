@@ -17,6 +17,15 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        flex-grow: 1;
+        width: 60vw;
+      }
+      .notice-time{
+        display: flex;
+        justify-content: flex-end;
+        font-size: 0.7rem;
+        flex-grow: 1;
+        width: 40vw;
       }
     }
   }

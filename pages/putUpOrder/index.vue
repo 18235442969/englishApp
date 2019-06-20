@@ -19,7 +19,7 @@
             钱包余额
           </view>
           <view class="order-money-item-num">
-            {{balance}}
+            {{balance | numberFilter}}
           </view>
         </view>
         <view class="order-money-item right-line">
@@ -35,7 +35,7 @@
             可售额度
           </view>
           <view class="order-money-item-num">
-            {{csTotal}}
+            {{csTotal | numberFilter}}
           </view>
         </view>
       </view>
@@ -97,7 +97,7 @@
       </swiper-item>
       <swiper-item class="order-content-item">
         <scroll-view class="order-content-item-scroll" :scroll-y="true">
-          <view class="order-mail-item" v-for="i in mailList" :key="i.id">
+          <view class="order-mail-item" v-for="(i, index) in mailList" :key="index">
             <view class="order-mail-item-top">
               <view class="order-mail-item-top-id">
                 单号:{{i.code}}
@@ -270,6 +270,28 @@
         price: 0,
         freeze: 0,
         csTotal: 0
+      }
+    },
+    filters: {
+      timeFilter(val) {
+        return val.replace(/T/g, ' ').replace(/-/g, '/');
+      },
+      numberFilter(val) {
+        let number = parseFloat(val);
+        if (isNaN(number)) {
+          return 0;
+        }
+        if (number > 9999) {
+          if (number > 99999999) {
+            let num = number / 100000000;
+            return parseInt(num * 100) / 100 + '亿';
+          } else {
+            let num = number / 10000;
+            return parseInt(num * 100) / 100 + '万';
+          }
+        } else {
+          return parseInt(number * 100) / 100;
+        }
       }
     },
     computed: {
@@ -503,11 +525,6 @@
           }
         } catch (error) {
         }
-      }
-    },
-    filters: {
-      timeFilter(val) {
-        return val.replace(/T/g, ' ').replace(/-/g, '/');
       }
     },
     onLoad(option) {

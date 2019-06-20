@@ -34,11 +34,12 @@ const startStudy = ({id}) => {
   return service(params);
 }
 
-const submitWord = ({id}) => {
+const submitWord = ({id, answer}) => {
   let params = {
     url: url.submitWord,
     data: {
-      id
+      id,
+      answer
     }
   }
   return service(params);

@@ -6,6 +6,9 @@
         <view class="notice-text">
           {{item.title}}
         </view>
+        <view class="notice-time">
+          {{item.createtime | timeFilter}}
+        </view>
       </view>
     </view>
     <view class="no-data" v-if="noticeList.length === 0">
@@ -27,6 +30,13 @@
         pageIndex: 1,
         pageSize: 20,
         loadMore: true
+      }
+    },
+    filters: {
+      timeFilter(val) {
+        let index = val.lastIndexOf(':');
+        let time = val.slice(0, index);
+        return time.replace(/-/g, '/').replace(/T/g, '');
       }
     },
     methods: {
@@ -63,7 +73,7 @@
       
     },
     created() {
-      this.getNoticeList()
+      this.getNoticeList();
     },
   }
 </script>

@@ -15,7 +15,7 @@
 			</view>
       <view class="input-line password-line">
         <view class="password-input">
-          <input :type="passworType" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入新密码" :maxlength="20" />
+          <input :type="passworType" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入新密码(8-16位)" :maxlength="16" />
         </view>
         <view class="password-icon" @click="changePasswordType">
           <icon-font className="iconmimabukejian" fontClass="passwordIcon" v-if="passworType == 'password'"/>
@@ -103,6 +103,13 @@
         })) {
           return;
         }
+        if (!valid.passwordValid(this.password)) {
+          return uni.showToast({
+            icon: 'none',
+            mask: true,
+            title: '登录密码需要同时包含字母和数字，以字母开头'
+          });
+        }
         try {
           uni.showLoading({
             mask: true
@@ -119,11 +126,6 @@
             this.phone = '';
             this.password = '';
             this.code = '';
-          } else {
-            uni.showToast({
-              icon: 'none',
-              title: '修改失败'
-            })
           }
         } catch (error) {
         }

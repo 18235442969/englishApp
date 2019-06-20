@@ -30,7 +30,13 @@
     },
     mounted() {
       let wordList = uni.getStorageSync('word-list') || [];
-      let learnWordList = wordList.filter(e => !e.know)
+      let learnWordList = wordList.filter(e => !e.know);
+      let obj = {}
+      learnWordList = learnWordList.reduce((cur, next) => {
+          //是否数组中是否已经有这个元素，没有则添加
+          obj[next.id] ? true : obj[next.id] = true && cur.push(next)
+          return cur
+      }, []);
       if (learnWordList.length === 0) {
         return uni.navigateBack();
       };

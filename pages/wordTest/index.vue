@@ -7,7 +7,7 @@
       [{{wordValue.symbols[0].ph_am}}]
     </view>
     <view class="word-text-list">
-      <view class="word-text-item" :class="word.chooseAnswerClass.a ? word.chooseAnswerClass.a === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''" @click="chooseOption('a')">
+      <view class="word-text-item" :class="word.chooseAnswerClass.a ? word.chooseAnswerClass.a === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''" @click="submitWord('a')">
         <view class="word-text-item-option">
           A
         </view>
@@ -15,7 +15,7 @@
           {{word.a}}
         </view>
       </view>
-      <view class="word-text-item" :class="word.chooseAnswerClass.b ? word.chooseAnswerClass.b === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''" @click="chooseOption('b')">
+      <view class="word-text-item" :class="word.chooseAnswerClass.b ? word.chooseAnswerClass.b === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''" @click="submitWord('b')">
         <view class="word-text-item-option">
           B
         </view>
@@ -23,7 +23,7 @@
           {{word.b}}
         </view>
       </view>
-      <view class="word-text-item" :class="word.chooseAnswerClass.c ? word.chooseAnswerClass.c === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''"  @click="chooseOption('c')">
+      <view class="word-text-item" :class="word.chooseAnswerClass.c ? word.chooseAnswerClass.c === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''"  @click="submitWord('c')">
         <view class="word-text-item-option">
           C
         </view>
@@ -31,7 +31,7 @@
           {{word.c}}
         </view>
       </view>
-      <view class="word-text-item" :class="word.chooseAnswerClass.d ? word.chooseAnswerClass.d === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''"  @click="chooseOption('d')">
+      <view class="word-text-item" :class="word.chooseAnswerClass.d ? word.chooseAnswerClass.d === 1 ? 'word-text-item-true' : 'word-text-item-false' : ''"  @click="submitWord('d')">
         <view class="word-text-item-option">
           D
         </view>
@@ -70,25 +70,25 @@
     mounted() {
       let wordList = uni.getStorageSync('word-list') || [];
       let wordTestList = wordList.filter(e => !e.know);
-      let list;
-      if (wordTestList[0].learn) {
-        if (wordTestList.length > 3) {
-          list = this.copyList(wordTestList, 3);
-        } else if (wordTestList.length === 1) {
-          list = wordTestList;
-        } else {
-          list = this.copyList(wordTestList, 2);
-        }
-      } else {
-        if (wordTestList.length > 1) {
-          list = this.copyList(wordTestList, 2);
-        } else {
-          list = this.copyList(wordTestList, 1);
-        }
-      }
-      this.wordTestList = list;
-      list[this.index].chooseAnswerClass = {};
-      this.word = list[this.index];
+      // let list;
+      // if (wordTestList[0].learn) {
+      //   if (wordTestList.length > 3) {
+      //     list = this.copyList(wordTestList, 3);
+      //   } else if (wordTestList.length === 1) {
+      //     list = wordTestList;
+      //   } else {
+      //     list = this.copyList(wordTestList, 2);
+      //   }
+      // } else {
+      //   if (wordTestList.length > 1) {
+      //     list = this.copyList(wordTestList, 2);
+      //   } else {
+      //     list = this.copyList(wordTestList, 1);
+      //   }
+      // }
+      this.wordTestList = wordTestList;
+      wordTestList[this.index].chooseAnswerClass = {};
+      this.word = wordTestList[this.index];
       this.wordValue = JSON.parse(this.word.value.replace(/\\r\\n/g, ''));
     },
     methods: {
@@ -102,12 +102,8 @@
         }
         return arr;
       },
-      chooseOption(answer) {
-        if (!this.isNext) {
-          return;
-        }
-        this.isNext = false;
-        const answerIsTrue = this.word.answer.toUpperCase() === answer.toUpperCase()
+      chooseOption(answerIsTrue, answer) {
+        // const answerIsTrue = this.word.answer.toUpperCase() === answer.toUpperCase()
         let changeWord = {...this.wordTestList[this.index]};
         if (!changeWord.chooseAnswerClass) {
           changeWord.chooseAnswerClass = {};
@@ -125,10 +121,16 @@
         };
         let wordList = [...new Set(this.wordTestList.filter(e => e.id === this.word.id).map(e => e.know))];
         if (answerIsTrue && wordList.length === 1) {
-          this.submitWord(this.word);
-        } else {
-          this.getNextWord();
+          let list = uni.getStorageSync('word-list') || [];
+          list.forEach(e => {
+            if (e.id === this.word.id) {
+              e.know = true;
+            }
+          })
+          uni.setStorageSync('word-list', list);
+          // this.submitWord(this.word);
         }
+        this.getNextWord();
       },
       getNextWord() {
         setTimeout(() => {
@@ -152,21 +154,29 @@
           this.isNext = true;
         }, 200);
       },
-      async submitWord(word) {
+      async submitWord(answer) {
         try {
-          let res = await wordApi.submitWord({
-            id: word.id
-          });
-          if (res.success) {
-            let wordList = uni.getStorageSync('word-list') || [];
-            let index = wordList.findIndex(e => e.id === word.id);
-            wordList[index].know = true;
-            uni.setStorageSync('word-list', wordList);
-            this.getNextWord();
-          } else {
-            this.isNext = true;
+          if (!this.isNext) {
+            return;
           }
+          this.isNext = false;
+          let res = await wordApi.submitWord({
+            id: this.word.id,
+            answer: answer
+          });
+          uni.hideToast();
+          this.chooseOption(res.success, answer);
+          // if (res.success) {
+            // let wordList = uni.getStorageSync('word-list') || [];
+            // let index = wordList.findIndex(e => e.id === word.id);
+            // wordList[index].know = true;
+            // uni.setStorageSync('word-list', wordList);
+            // this.getNextWord();
+          // } else {
+          //   // this.isNext = true;
+          // }
         } catch (error) {
+          console.log(error)
           this.isNext = true;
         }
       }

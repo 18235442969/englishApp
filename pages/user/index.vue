@@ -17,7 +17,7 @@
           链上资产
         </view>
         <view class="user-info-item-center">
-          {{upMoney}}
+          {{upMoney | numberFilter}}
         </view>
         <view class="user-info-item-bottom">
           点券
@@ -28,7 +28,7 @@
           钱包余额
         </view>
         <view class="user-info-item-center">
-          {{balance}}
+          {{balance | numberFilter}}
         </view>
         <view class="user-info-item-bottom" @click="onChain">
           <img src="../../asstes/images/user-money.png" class="user-money">
@@ -39,7 +39,7 @@
           可售额度
         </view>
         <view class="user-info-item-center">
-          {{saleMoney}}
+          {{saleMoney | numberFilter}}
         </view>
         <view class="user-info-item-bottom">
           点券
@@ -193,6 +193,25 @@
         balance: 0,
         saleMoney: 0,
         userId: '0'
+      }
+    },
+    filters: {
+      numberFilter(val) {
+        let number = parseFloat(val);
+        if (isNaN(number)) {
+          return 0;
+        }
+        if (number > 9999) {
+          if (number > 99999999) {
+            let num = number / 100000000;
+            return parseInt(num * 100) / 100 + '亿';
+          } else {
+            let num = number / 10000;
+            return parseInt(num * 100) / 100 + '万';
+          }
+        } else {
+          return parseInt(number * 100) / 100;
+        }
       }
     },
     computed: {

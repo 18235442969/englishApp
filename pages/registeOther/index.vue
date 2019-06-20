@@ -9,7 +9,7 @@
 			</view>
       <view class="input-line password-line">
         <view class="password-input">
-          <input type="text" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入密码" :maxlength="20" />
+          <input type="text" class="change-password-input" placeholder-class="change-password-placeholder" v-model="password" placeholder="请输入密码(8-16位)" :maxlength="20" />
         </view>
 			</view>
     </view>
@@ -58,7 +58,7 @@
           return uni.showToast({
             icon: 'none',
             mask: true,
-            title: '登录密码需要同时包含字母和数字'
+            title: '登录密码需要同时包含字母和数字，以字母开头'
           });
         }
         try {

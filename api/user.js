@@ -17,7 +17,7 @@ const url = {
   getRecommendList: 'UserInfo/GetRecommendList',
   getRechargeList: 'UserInfo/GetRechargeList',
   getReleaseList: 'UserInfo/GetReleaseList',
-
+  getActivityList: 'UserInfo/GetActivityList',
 }
 
 const registerSendMsg = ({ phone }) => {
@@ -30,15 +30,16 @@ const registerSendMsg = ({ phone }) => {
   return service(params);
 }
 
-const register = ({ phone, password, code, payPassword, generateCode }) => {
+const register = ({ phone, password, payPassword, generateCode, uuId }) => {
   let params = {
     url: url.register,
     data: {
       phone,
-      code,
+      // code,
       password,
       payPassword,
-      generateCode
+      generateCode,
+      uuId
     }
   }
   return service(params);
@@ -196,6 +197,17 @@ const getReleaseList = ({pageIndex, pageSize}) => {
   return service(params);
 }
 
+const getActivityList = ({pageIndex, pageSize}) => {
+  let params = {
+    url: url.getActivityList,
+    data: {
+      requestPage: pageIndex,
+      pagesize: pageSize
+    }
+  }
+  return service(params);
+}
+
 export default{
   registerSendMsg,
   register,
@@ -212,5 +224,6 @@ export default{
   getAmountList,
   getRecommendList,
   getRechargeList,
-  getReleaseList
+  getReleaseList,
+  getActivityList
 }

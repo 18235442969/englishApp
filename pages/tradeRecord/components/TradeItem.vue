@@ -27,7 +27,7 @@
         已完成
       </view>
       <view class="trade-item-middle trade-item-start">
-        成交额度
+        成交总额
       </view>
       <view class="trade-item-bottom trade-item-start">
         {{trade.total}}

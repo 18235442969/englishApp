@@ -7,9 +7,9 @@
       <view class="rewards-tab-item" :class="tabIndex === 1 ? 'rewards-tab-item-choose' : ''" @click="changeTab(1)">
         充值奖
       </view>
-      <!-- <view class="rewards-tab-item" :class="tabIndex === 2 ? 'rewards-tab-item-choose' : ''" @click="changeTab(2)">
-        持有奖
-      </view> -->
+      <view class="rewards-tab-item" :class="tabIndex === 2 ? 'rewards-tab-item-choose' : ''" @click="changeTab(2)">
+        活动奖
+      </view>
     </view>
     <view class="rewards-line"></view>
     <scroll-view :scroll-y="true" class="rewards-list" v-show="tabIndex === 0" @scrolltolower="getRecommendMore">
@@ -28,9 +28,14 @@
         </text>
       </view>
     </scroll-view>
-    <!-- <scroll-view :scroll-y="true" class="rewards-list" v-if="tabIndex === 2">
-      <rewards-item></rewards-item>2
-    </scroll-view> -->
+    <scroll-view :scroll-y="true" class="rewards-list" v-show="tabIndex === 2" @scrolltolower="getActivityMore">
+      <rewards-item v-for="(i , index) in activityList" :key="index" :item="i"></rewards-item>
+      <view class="no-data" v-if="tabIndex === 2 && activityList.length === 0">
+        <text class="no-data-text">
+          暂无数据
+        </text>
+      </view>
+    </scroll-view>
 	</view>
 </template>
 
@@ -48,10 +53,17 @@
         recommendPageCount: 0,
         recommendPageIndex: 1,
         recommendPageSize: 20,
+
         rechargeList: [],
         rechargePageCount: 0,
         rechargePageIndex: 1,
         rechargePageSize: 20,
+
+        activityList: [],
+        activityPageCount: 0,
+        activityPageIndex: 1,
+        activityPageSize: 20,
+
         loadMore: true
       }
     },
@@ -73,6 +85,13 @@
           this.rechargePageIndex++;
           this.loadMore = false;
           this.getRechargeList();
+        }
+      },
+      getActivityMore() {
+        if (this.activityPageIndex < this.activityPageCount && this.loadMore) {
+          this.activityPageIndex++;
+          this.loadMore = false;
+          this.getActivityList();
         }
       },
       async getRecommendList() {
@@ -104,11 +123,27 @@
         } catch (error) {
           this.loadMore = true;
         }
+      },
+      async getActivityList() {
+        try {
+          let res = await userApi.getActivityList({
+            pageIndex: this.activityPageIndex,
+            pageSize: this.activityPageSize
+          });
+          this.loadMore = true;
+          if (res.success) {
+            this.activityPageCount = res.body.pageCount;
+            this.activityList = [...this.activityList, ...res.body.paging];
+          }
+        } catch (error) {
+          this.loadMore = true;
+        }
       }
     },
     onLoad() {
       this.getRecommendList();
       this.getRechargeList();
+      this.getActivityList();
     }
   }
 </script>

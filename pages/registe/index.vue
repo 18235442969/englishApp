@@ -28,7 +28,7 @@
         </view>
       </view>
       
-      <view class="code">
+      <!-- <view class="code">
         <view class="registe-line">
           <view class="input-icon">
             <icon-font
@@ -50,7 +50,7 @@
             {{sendCodeText}}
           </view>
         </view>
-      </view>
+      </view> -->
 
       <view class="password">
         <view class="registe-line">
@@ -66,8 +66,8 @@
               class="registe-input"
               placeholder-class="registe-placeholder"
               v-model="password"
-              placeholder="请输入登录密码"
-              :maxlength="20"
+              placeholder="请输入登录密码(8-16位)"
+              :maxlength="16"
             />
           </view>
         </view>
@@ -189,7 +189,7 @@
       async submit() {
         if (!this.inputValid({
           phone: this.phone,
-          code: this.code,
+          // code: this.code,
           password: this.password,
           payPassword: this.tradePassword,
           referrer: this.referrer
@@ -207,7 +207,7 @@
           return uni.showToast({
             icon: 'none',
             mask: true,
-            title: '登录密码需要同时包含字母和数字'
+            title: '登录密码需要同时包含字母和数字，以字母开头'
           });
         }
         const res = /^[0-9]+$/;
@@ -224,10 +224,11 @@
         try {
           let res = await userApi.register({
             phone: this.phone,
-            code: this.code,
+            // code: this.code,
             password: this.password,
             payPassword: this.tradePassword,
-            generateCode: this.referrer
+            generateCode: this.referrer,
+            uuId: plus.device.uuid
           });
           if (res.success) {
             uni.showToast({
@@ -241,6 +242,13 @@
             }, 1000);
           }
         } catch (error) {
+          uni.hideLoading();
+          uni.showToast({
+            icon: 'none',
+            title: '注册失败',
+            mask: true,
+            duration: 1000
+          })
         }
       }
     }

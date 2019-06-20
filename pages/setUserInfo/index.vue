@@ -34,7 +34,7 @@
         </view>
       </view>
       <view class="set-user-info-info-line">
-        <input type="text" class="set-user-info-input" placeholder-class="set-user-info-placeholder" v-model="alipay" placeholder="请输入支付宝号" :maxlength="20" v-if="!user.alipay"/>
+        <input type="text" class="set-user-info-input" placeholder-class="set-user-info-placeholder" v-model="alipay" placeholder="请输入支付宝号" :maxlength="40" v-if="!user.alipay"/>
         <view v-else class="else-text">
           支付宝号：{{alipay}}
         </view>

@@ -14,7 +14,7 @@
 					</view>
 				</view>
 				<view class="study-info-text">
-					已学习天数
+					已达标天数
 				</view>
 			</view>
 			<view class="study-info-wordnum">
@@ -99,6 +99,9 @@
 			async getWordList() {
 				try {
 					let user = this.userInfo || getSign() || {};
+					uni.showLoading({
+						mask: true
+					});
 					let res = await wordApi.startStudy({
 						id: user.typeId
 					})
